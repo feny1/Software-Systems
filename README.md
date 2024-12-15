@@ -15,7 +15,7 @@
 - Volunteer Profile
 - Volunteer Application / Company
 
-## Screens
+## Pages
 
 - Main Landpage
 - Login Page
