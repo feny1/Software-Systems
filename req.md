@@ -65,26 +65,59 @@
 - Account locked due to multiple failed login attempts.
 - User account does not exist.
 
-### Use Case 2: Job Posting (Organization)
-**Actors:** Organization Owner
+### Use Case 2: Register a New Account
+**Actors:** Individual, Organization
 
 **Precondition:**
-- User is logged in as an Organization Owner.
+- The user does not already have an account.
 
 **Main Flow:**
-1. User navigates to the "Post a Job" section.
-2. Enters job details such as title, description, qualifications, and salary.
-3. Submits the form.
-4. System saves the job posting and makes it visible to Individual users.
+1. User selects "Register."
+2. Enters required details (e.g., email, password, name).
+3. Submits the registration form.
+4. System creates the account and confirms registration.
 
 **Alternate Flow:**
-- If validation fails (e.g., missing required fields), display error messages and allow corrections.
+- If registration fails due to missing or invalid inputs, display an error message.
 
 **Exceptions:**
-- Network failure during submission.
-- Exceeding job posting limit for the account.
+- Email is already associated with an existing account.
 
-### Use Case 3: Apply for a Job (Individual)
+### Use Case 3: Edit Profile
+**Actors:** Individual, Organization
+
+**Precondition:**
+- User is logged in.
+
+**Main Flow:**
+1. User navigates to the "Edit Profile" section.
+2. Updates fields such as name, email, or contact information.
+3. Submits the changes.
+4. System saves the updated profile information.
+
+**Exceptions:**
+- Validation errors on input fields (e.g., invalid email format).
+- Network issues during submission.
+
+### Use Case 4: Filter Jobs
+**Actors:** Individual User
+
+**Precondition:**
+- User is logged in as an Individual.
+
+**Main Flow:**
+1. User navigates to the "Filter Jobs" section.
+2. Selects filter criteria such as location, job type, and salary range.
+3. Clicks "Apply Filters."
+4. System displays a list of jobs matching the criteria.
+
+**Alternate Flow:**
+- If no jobs match the criteria, display a message indicating no results found.
+
+**Exceptions:**
+- Invalid filter inputs cause the system to display an error message.
+
+### Use Case 5: Apply for a Job
 **Actors:** Individual User
 
 **Precondition:**
@@ -103,7 +136,54 @@
 - File upload exceeds allowed size or format restrictions.
 - Application limit exceeded for the job.
 
-### Use Case 4: Manage Applications (Organization)
+### Use Case 6: View Requests
+**Actors:** Individual User, Organization Owner, Admin
+
+**Precondition:**
+- User is logged in.
+
+**Main Flow:**
+1. User navigates to the "View Requests" section.
+2. System displays a list of relevant requests (e.g., job applications, role changes).
+3. User reviews details of each request.
+
+**Exceptions:**
+- Network failure prevents loading requests.
+- Unauthorized access attempt.
+
+### Use Case 7: Post a Job
+**Actors:** Organization Owner
+
+**Precondition:**
+- User is logged in as an Organization Owner.
+
+**Main Flow:**
+1. User navigates to the "Post a Job" section.
+2. Enters job details such as title, description, qualifications, and salary.
+3. Submits the form.
+4. System saves the job posting and makes it visible to Individual users.
+
+**Alternate Flow:**
+- If validation fails (e.g., missing required fields), display error messages and allow corrections.
+
+**Exceptions:**
+- Network failure during submission.
+- Exceeding job posting limit for the account.
+
+### Use Case 8: View Job Posting History
+**Actors:** Organization Owner
+
+**Precondition:**
+- User is logged in as an Organization Owner.
+
+**Main Flow:**
+1. User navigates to the "View History" section.
+2. System displays a history of job postings and application statuses.
+
+**Exceptions:**
+- Data retrieval error prevents displaying history.
+
+### Use Case 9: Manage Applications
 **Actors:** Organization Owner
 
 **Precondition:**
@@ -119,7 +199,7 @@
 - Network failure during status update.
 - Unauthorized access attempt by a non-owner.
 
-### Use Case 5: Assign Roles (Admin)
+### Use Case 10: Assign Roles/Flags
 **Actors:** Admin
 
 **Precondition:**
