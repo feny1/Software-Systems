@@ -25,11 +25,6 @@
 4. **Manage Applications:**
    - Accept, reject, or mark applications as pending.
 
-### Admin
-1. **Assign Roles/Flags:**
-   - Manage user roles (Admin, Employee, User, Owner).
-   - Update role/flag assignments for both individuals and organizations.
-
 ## Non-Functional Requirements
 1. **Performance:**
    - The system should handle up to 10,000 concurrent users without significant performance degradation.
@@ -48,7 +43,7 @@
 ## Use Cases
 
 ### Use Case 1: User Login
-**Actors:** Individual, Organization, Admin
+**Actors:** Individual, Organization
 
 **Precondition:**
 - The user has an existing account.
@@ -137,7 +132,7 @@
 - Application limit exceeded for the job.
 
 ### Use Case 6: View Requests
-**Actors:** Individual User, Organization Owner, Admin
+**Actors:** Individual User, Organization Owner
 
 **Precondition:**
 - User is logged in.
@@ -199,25 +194,6 @@
 - Network failure during status update.
 - Unauthorized access attempt by a non-owner.
 
-### Use Case 10: Assign Roles/Flags
-**Actors:** Admin
-
-**Precondition:**
-- User is logged in as Admin.
-
-**Main Flow:**
-1. Admin navigates to the "Manage Users" section.
-2. Searches for a user by name or email.
-3. Selects a user and assigns or updates their role/flag.
-4. System saves the changes and updates the user’s permissions.
-
-**Alternate Flow:**
-- If user details are not found, display an error message.
-
-**Exceptions:**
-- Role assignment fails due to database error.
-- Admin lacks sufficient privileges to assign certain roles.
-
 ### Technical constraints
 - HTML
 - CSS
@@ -226,5 +202,3 @@
 - MySQL
 - Figma
 - Trello (Scrum)
-
-This document provides a structured overview of functional and non-functional requirements along with key use cases and exceptions for the system.
