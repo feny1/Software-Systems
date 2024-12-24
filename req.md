@@ -218,4 +218,13 @@
 - Role assignment fails due to database error.
 - Admin lacks sufficient privileges to assign certain roles.
 
+### Technical constraints
+- HTML
+- CSS
+- Javascript
+- PHP
+- MySQL
+- Figma
+- Trello (Scrum)
+
 This document provides a structured overview of functional and non-functional requirements along with key use cases and exceptions for the system.
