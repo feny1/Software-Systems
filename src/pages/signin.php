@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link type="text/css" rel="stylesheet" href="../styles/globals.css">
   <link rel="stylesheet" href="../styles/signin.css">
   <title>Signin</title>
 </head>
@@ -11,7 +10,7 @@
   <section>
     <h2>Mawsemy</h2>
   </section>
-  <main>
+  <header>
     <h1>New Signup</h1>
     <nav>
       <ul>
@@ -19,6 +18,6 @@
         <li><a href="#">X</a></li>
       </ul>
     </nav>
-  </main>
+  </header>
 </body>
 </html>

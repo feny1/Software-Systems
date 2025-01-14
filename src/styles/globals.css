@@ -4,10 +4,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  list-style: none;
+  text-decoration: none;
 }
 :root {
   --main-color: #034c3c;
-  --secondry-color: #d2b48c;
+  --secondary-color: #d2b48c;
   --white-color: #f8f8f8;
   --black-color: #2b3344;
   --white-alt-color: #cdd5d1;

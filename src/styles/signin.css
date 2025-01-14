@@ -1,4 +1,18 @@
+@import url(globals.css);
 body {
   display: flex;
-  background-color: var(--main-color);
+}
+
+header {
+  background-image: linear-gradient(
+    to bottom,
+    var(--main-color),
+    var(--secondary-color)
+  );
+  width: 100%;
+  margin: 0;
+  flex: 3;
+}
+section {
+  flex: 1;
 }
