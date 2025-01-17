@@ -6,13 +6,13 @@
       <ul>
         <li>
           <a href="./profile.php" class="nav-path">
-            سيرتي
+            <span>سيرتي</span>
             <img src="../images/cv.svg" alt="شعار للسيرة الذاتية" >
           </a>
         </li>
         <li>
           <a href="./company.php" class="nav-path">
-            الشركات
+            <span>الشركات</span>
             <img src="../images/company.svg" alt="شعار لشركة" >
           </a>
         </li>

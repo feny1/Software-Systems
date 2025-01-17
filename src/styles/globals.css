@@ -49,3 +49,11 @@ nav.main-navigation ul a {
 
   margin-bottom: 3.5rem;
 }
+@media (max-width: 767px) {
+  nav.main-navigation ul a {
+    justify-content: center;
+  }
+  nav.main-navigation ul a span {
+    display: none;
+  }
+}

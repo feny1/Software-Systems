@@ -13,7 +13,7 @@
       <header>
         <div class="username">
           <a href="./profile.php">
-            <img src="../images/profile.svg" alt="شعار المستخدم">
+            <img class="nav-icon" src="../images/profile.svg" alt="شعار المستخدم">
             <h2>اسم المستخدم</h2>
           </a>
         </div>
