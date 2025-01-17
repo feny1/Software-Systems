@@ -14,11 +14,15 @@ body {
 .nav-icon {
   --color: var(--white-alt-color);
   background-color: var(--color);
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 
   padding: 0.5rem;
+}
+.nav-icon:hover {
+  filter: brightness(0.85);
+  transition-duration: 200ms;
 }
 
 @media (max-width: 767px) {
@@ -66,11 +70,7 @@ header::after {
   align-items: center;
   gap: 0.75rem;
 
-  font-size: 1.25rem;
-}
-
-.username a h2 {
-  min-height: 35px;
+  font-size: 1rem;
 }
 
 .options {
@@ -123,9 +123,7 @@ main .filter-choices {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
 
-  padding-inline: 1rem;
   border: 1px solid var(--black-color);
   border-radius: 10px;
 
@@ -135,9 +133,19 @@ main .filter-choices {
 }
 
 main .filter-choices > *:not(:last-child) {
-  padding-block: 1rem;
-  padding-left: 1.25rem;
   border-left: 1px solid var(--black-color);
+}
+main .filter-choices > * {
+  padding-inline: 1.25rem;
+  padding-block: 1rem;
+}
+
+main .filter-choices > *:hover {
+  transition-duration: 400ms;
+  cursor: pointer;
+  border-radius: 10px;
+  color: var(--white-color);
+  background-color: var(--black-color);
 }
 
 main form > * {
@@ -151,6 +159,8 @@ main form input {
   border: 1px solid var(--black-color);
   border-radius: 9px;
   padding: 0.5rem 1rem;
+
+  outline: var(--main-color);
 }
 
 /* End Filter Section */
