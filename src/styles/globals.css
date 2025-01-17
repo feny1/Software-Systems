@@ -49,7 +49,15 @@ nav.main-navigation ul a {
 
   margin-bottom: 3.5rem;
 }
-@media (max-width: 767px) {
+@media (max-width: 992px) {
+  .logo-link img {
+    width: 30px;
+    height: 30px;
+    font-size: 1.25rem;
+  }
+  nav.main-navigation {
+    padding: 0.4rem;
+  }
   nav.main-navigation ul a {
     justify-content: center;
   }
