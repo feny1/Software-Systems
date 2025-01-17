@@ -1,1 +1,56 @@
 @import url(globals.css);
+/* Start Components */
+.nav-icon {
+  --color: var(--white-alt-color);
+  background-color: var(--color);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  padding: 0.5rem;
+}
+/* End Components */
+
+main {
+  width: 100%;
+}
+
+header {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1.25rem 3rem;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 70%;
+  height: 4px;
+
+  background-color: var(--main-color);
+}
+
+.username a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.username img {
+  background-color: var(--white-alt-color);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  padding: 0.5rem;
+}
+
+.options {
+  display: flex;
+  gap: 1.5rem;
+}

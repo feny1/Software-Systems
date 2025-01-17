@@ -17,6 +17,7 @@
 
 a {
   display: block;
+  color: var(--black-color);
 }
 
 .page-structure {
