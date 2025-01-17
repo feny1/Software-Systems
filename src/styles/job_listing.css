@@ -136,7 +136,7 @@ main .filter-choices > *:not(:last-child) {
   border-left: 1px solid var(--black-color);
 }
 main .filter-choices > * {
-  padding-inline: 1.25rem;
+  padding-inline: 1rem;
   padding-block: 1rem;
 }
 
