@@ -1,5 +1,11 @@
 @import url(globals.css);
 /* Start Components */
+* {
+  color: var(--black-color);
+}
+body {
+  background-color: var(--white-color);
+}
 .nav-icon {
   --color: var(--white-alt-color);
   background-color: var(--color);
@@ -15,6 +21,7 @@ section.page-content {
   width: 100%;
 }
 
+/* Start Header */
 header {
   position: relative;
   display: flex;
@@ -55,3 +62,66 @@ header::after {
   display: flex;
   gap: 1.5rem;
 }
+/* End Header */
+
+/* Start Filter Section */
+main {
+  padding: 1.25rem 3rem;
+}
+main .content {
+  display: flex;
+}
+main .heading-title {
+  font-size: 2rem;
+  margin-bottom: 4rem;
+}
+
+main .filter-section {
+  flex-basis: 320px;
+}
+
+main .filter-section h3 {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+main .filter-choices {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  padding-inline: 1rem;
+  border: 1px solid var(--black-color);
+  border-radius: 10px;
+
+  background-color: white;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+main .filter-choices > *:not(:last-child) {
+  padding-block: 1rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--black-color);
+}
+
+main form > * {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+main form input {
+  width: 100%;
+  min-height: 35px;
+  border: 1px solid var(--black-color);
+  border-radius: 9px;
+  padding: 0.5rem 1rem;
+}
+
+/* End Filter Section */

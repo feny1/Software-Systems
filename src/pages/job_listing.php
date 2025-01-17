@@ -26,6 +26,29 @@
           </a>
         </div>
       </header>
+
+      <main>
+        <h1 class="heading-title">أحدث الوظائف</h1>
+
+        <div class="content">
+          <div class="filter-section">
+            <h3>
+              <img src="../images/cv.svg" alt="شعار تصفية">
+              التصفية
+            </h3>
+            <div class="filter-choices">
+              <p>التصفية الأولى</p>
+              <p>التصفية الثانية</p>
+            </div>
+
+            <form action="post">
+              <label for="company-name">البحث عن اسم شركة: </label>
+              <input type="text" name="company-name">
+            </form>
+          </div>
+          <div class="jobs-section"></div>
+        </div>
+      </main>
     </section>
   </section>
 </body>
