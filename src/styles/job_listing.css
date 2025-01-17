@@ -11,13 +11,12 @@
 }
 /* End Components */
 
-main {
+section.page-content {
   width: 100%;
 }
 
 header {
   position: relative;
-  flex: 1;
   display: flex;
   justify-content: space-between;
 
@@ -39,6 +38,8 @@ header::after {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+
+  font-size: 1.25rem;
 }
 
 .username img {
