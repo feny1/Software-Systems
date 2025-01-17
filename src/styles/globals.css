@@ -14,3 +14,37 @@
   --black-color: #2b3344;
   --white-alt-color: #cdd5d1;
 }
+
+a {
+  display: block;
+}
+
+.page-structure {
+  display: flex;
+  min-height: 100vh;
+}
+
+nav.main-navigation {
+  padding: 1.25rem;
+  background-color: var(--white-alt-color);
+}
+
+nav.main-navigation * {
+  color: var(--black-color);
+}
+
+nav.main-navigation .logo-link {
+  text-align: center;
+  font-size: 2rem;
+
+  margin-bottom: 6rem;
+}
+
+nav.main-navigation ul a {
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin-bottom: 3.5rem;
+}
