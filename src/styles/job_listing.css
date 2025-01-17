@@ -1,1 +1,297 @@
 @import url(globals.css);
+@media (max-width: 767px) {
+  :root {
+    font-size: 12px;
+  }
+}
+/* Start Components */
+* {
+  color: var(--black-color);
+}
+body {
+  background-color: var(--white-color);
+}
+.nav-icon {
+  --color: var(--white-alt-color);
+  background-color: var(--color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  padding: 0.5rem;
+}
+.nav-icon:hover {
+  filter: brightness(0.85);
+  transition-duration: 200ms;
+}
+
+@media (max-width: 767px) {
+  .nav-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+/* End Components */
+
+section.page-content {
+  width: 100%;
+}
+
+/* Start Header */
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 75px;
+
+  padding: 1.25rem 3rem;
+}
+
+@media (max-width: 992px) {
+  header {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 70%;
+  height: 4px;
+
+  background-color: var(--main-color);
+}
+
+.username a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  font-size: 1rem;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+/* End Header */
+
+/* Start Filter Section */
+main {
+  padding: 1.25rem 2rem;
+}
+
+main .filter-section {
+  margin-bottom: 3rem;
+}
+@media (min-width: 992px) {
+  main > .content {
+    display: flex;
+    gap: 3rem;
+  }
+}
+main .heading-title {
+  font-size: 2rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 992px) {
+  main {
+    padding: 1.25rem 3rem;
+  }
+  main .filter-section {
+    flex-basis: 320px;
+    margin-bottom: 0;
+  }
+}
+
+main .filter-section h3 {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+main .filter-choices {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid var(--black-color);
+  border-radius: 10px;
+
+  background-color: white;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+main .filter-choices > *:not(:last-child) {
+  border-left: 1px solid var(--black-color);
+}
+main .filter-choices > * {
+  padding-inline: 1rem;
+  padding-block: 1rem;
+}
+
+main .filter-choices > *:hover {
+  transition-duration: 400ms;
+  cursor: pointer;
+  border-radius: 10px;
+  color: var(--white-color);
+  background-color: var(--black-color);
+}
+
+main form > * {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+main form input {
+  width: 100%;
+  min-height: 35px;
+  border: 1px solid var(--black-color);
+  border-radius: 9px;
+  padding: 0.5rem 1rem;
+
+  outline: var(--main-color);
+}
+
+/* End Filter Section */
+
+/* Start jobs */
+
+.jobs-section {
+  display: grid;
+  flex: 1;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  place-items: center;
+
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+
+@media (min-width: 992px) {
+  .jobs-section {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+.jobs-section .job {
+  max-width: 350px;
+  background-color: white;
+  border-radius: 15px;
+}
+@media (min-width: 992px) {
+  .jobs-section .job {
+    max-width: 420px;
+  }
+}
+.jobs-section .job img {
+  width: 100%;
+  border-start-start-radius: 15px;
+}
+
+.jobs-section .content {
+  padding: 1rem;
+}
+@media (min-width: 992px) {
+  .jobs-section .content {
+    display: flex;
+  }
+}
+.jobs-section .titles > * {
+  margin-bottom: 0.5rem;
+}
+
+.jobs-section .job-title {
+  color: var(--main-color);
+  font-size: 1.5rem;
+}
+.jobs-section .company-title {
+  font-size: 1.25rem;
+}
+
+.jobs-section .job .keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.job .keyword {
+  text-align: center;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  border-radius: 36px;
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+.job .description {
+  font-size: 0.75rem;
+  max-width: 180px;
+}
+
+.job a {
+  width: fit-content;
+  position: relative;
+  margin-right: auto;
+}
+.job a::before {
+  content: "إعرض المزيد";
+  position: absolute;
+  bottom: 5px;
+  left: 100px;
+  transform: translateX(-50%);
+  min-width: 100px;
+
+  color: var(--white-color);
+
+  z-index: 1000;
+}
+.job a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-top: 30px solid transparent;
+  border-bottom: 50px solid var(--black-color);
+
+  z-index: 1;
+}
+.job a:hover::after {
+  border-bottom: 50px solid var(--main-color);
+}
+@media (max-width: 992px) {
+  .job a::before {
+    left: 60px;
+    min-width: 100px;
+    color: var(--white-color);
+    z-index: 1000;
+    font-size: 0.65rem;
+  }
+  .job a::after {
+    content: "";
+    left: 30px;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid var(--black-color);
+    z-index: 1;
+  }
+  .job a:hover::after {
+    border-bottom: 30px solid var(--main-color);
+  }
+}
+
+/* End jobs */

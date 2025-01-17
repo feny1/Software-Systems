@@ -17,6 +17,7 @@
 
 a {
   display: block;
+  color: var(--black-color);
 }
 
 .page-structure {
@@ -40,11 +41,36 @@ nav.main-navigation .logo-link {
   margin-bottom: 6rem;
 }
 
-nav.main-navigation ul a {
+nav.main-navigation ul .nav-path {
   font-size: 1.25rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
 
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 992px) {
+  .logo-link img {
+    width: 30px;
+    height: 30px;
+    font-size: 1.25rem;
+  }
+  nav.main-navigation {
+    padding: 0.4rem;
+  }
+  nav.main-navigation ul a {
+    justify-content: center;
+  }
+  nav.main-navigation ul a span {
+    display: none;
+  }
+}
+.nav-path {
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.nav-path:hover {
+  transition-duration: 200ms;
+  background-color: var(--white-color);
 }
