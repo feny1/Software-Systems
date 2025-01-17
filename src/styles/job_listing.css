@@ -269,14 +269,12 @@ main form input {
 
   z-index: 1;
 }
-
+.job a:hover::after {
+  border-bottom: 50px solid var(--main-color);
+}
 @media (max-width: 992px) {
   .job a::before {
-    content: "إعرض المزيد";
-    position: absolute;
-    bottom: 5px;
     left: 60px;
-    transform: translateX(-50%);
     min-width: 100px;
     color: var(--white-color);
     z-index: 1000;
@@ -284,16 +282,15 @@ main form input {
   }
   .job a::after {
     content: "";
-    position: absolute;
-    bottom: 0;
     left: 30px;
-    width: 0;
-    height: 0;
     border-left: 55px solid transparent;
     border-right: 55px solid transparent;
     border-top: 30px solid transparent;
     border-bottom: 30px solid var(--black-color);
     z-index: 1;
+  }
+  .job a:hover::after {
+    border-bottom: 30px solid var(--main-color);
   }
 }
 
