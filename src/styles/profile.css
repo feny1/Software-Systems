@@ -1,0 +1,551 @@
+@import url(globals.css);
+@media (max-width: 767px) {
+  :root {
+    font-size: 12px;
+  }
+}
+/* Start Components */
+* {
+  color: var(--black-color);
+}
+body {
+  background-color: var(--white-color);
+}
+.nav-icon {
+  --color: var(--white-alt-color);
+  background-color: var(--color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  padding: 0.5rem;
+}
+.nav-icon:hover {
+  filter: brightness(0.85);
+  transition-duration: 200ms;
+}
+
+@media (max-width: 767px) {
+  .nav-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+/* End Components */
+
+section.page-content {
+  width: 100%;
+}
+
+/* Start Header */
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 75px;
+  background-color: var(--main-color);
+  padding: 1.25rem 3rem;
+}
+.username .profile-pic{
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: lightgray;
+  top: 0;
+}.username {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 65px;
+  position: absolute; /* Position it at the top of the page */
+  top: 0; /* Align it to the top of the page */
+  right: 18px; /* Adjust from the right edge */
+  z-index: 1000; /* Ensure it stays above other elements */
+  padding: 0.5rem 1rem; /* Optional for spacing inside the username box */
+  right: 10%;
+  top: 40px;
+}
+.options {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 65px;
+  position: absolute; /* Position it at the top of the page */
+  top: 40px; /* Align it to the top of the page */
+  left: 10px; /* Adjust from the left edge */
+  z-index: 1000; /* Ensure it stays above other elements */
+  padding: 0.5rem 1rem; /* Optional for spacing inside the options box */
+}
+
+.username h2{
+  font-size: 2rem;
+}
+.username h3
+{
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.username .user{
+  position: static;
+  margin-top: 100px;
+}
+@media (max-width: 992px) {
+  header {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 70%;
+  height: 4px;
+
+  background-color: var(--main-color);
+}
+
+/* End Header */
+/* General Layout */
+main {
+  margin-top: 70px;
+  width: 100%;
+  padding: 1rem; /* Add padding for better appearance on small screens */
+}
+
+main section {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional for design */
+  padding: 18px;
+}
+
+/* Profile Details Layout */
+.profile-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  gap: 2rem; /* Space between rows and columns */
+}
+
+.profile-details .block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--white-color);
+  padding: 1.5rem;
+  border-radius: 10px; /* Add rounded corners */
+}
+
+/* Headings */
+.profile-details .block h2 {
+  font-size: 1.75rem; /* Slightly reduced for smaller screens */
+  font-weight: 500;
+}
+
+/* List Styling */
+.profile-details .block ul {
+  list-style: none;
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 1rem;
+}
+
+.profile-details .block ul li {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1rem; /* Reduced font size for smaller screens */
+}
+
+/* Skills Section */
+.profile-details .skills ul {
+  list-style: none;
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap; /* Wrap skills for smaller screens */
+  gap: 0.5rem;
+}
+
+.profile-details .skills ul li {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  font-size: 0.9rem; /* Adjust size for better fit on small screens */
+}
+
+/* Text Styling */
+.profile-details .block ul li span {
+  font-weight: bold;
+}
+
+.profile-details .block ul li span::after {
+  content: ":";
+}
+
+.profile-details .block ul li span:first-child {
+  text-transform: capitalize;
+}
+
+.profile-details .block ul li span:last-child {
+  color: var(--main-color);
+}
+
+/* About Section */
+.profile-details .block.about p {
+  font-size: 1.25rem;
+  line-height: 1.6; /* Better readability */
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .profile-details {
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+    gap: 1.5rem; /* Reduce gap for compact layout */
+  }
+
+  .profile-details .block {
+    padding: 1rem; /* Reduce padding */
+  }
+
+  .profile-details .block h2 {
+    font-size: 1.5rem; /* Further reduce heading size */
+  }
+
+  .profile-details .block ul {
+    gap: 1rem; /* Adjust gap for smaller screens */
+  }
+
+  .profile-details .skills ul li {
+    font-size: 0.85rem; /* Smaller text for skills */
+    padding: 0.4rem; /* Compact skill badges */
+  }
+
+  main {
+    padding: 0.75rem; /* Reduce padding for smaller devices */
+  }
+}
+
+
+/* Styling the recent activity section */
+.recent-activity {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9; /* Light background for distinction */
+  border-radius: 10px;
+}
+
+/* General block styling */
+.recent-activity .block {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity .block h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--main-color);
+}
+
+/* Styling the history section */
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.history ul li .company {
+  background-color: #d4edda; /* Green background for company names */
+  color: #155724; /* Dark green text for readability */
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Styling the experiences section */
+.experinces table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.experinces table th,
+.experinces table td {
+  padding: 0.75rem;
+  text-align: right;
+  border: 1px solid #ddd;
+}
+
+.experinces table th {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.experinces table tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.experinces table tr:nth-child(even) {
+  background-color: #fff;
+}
+
+/* Styling the courses section */
+.courses ul {
+  list-style: none;
+  padding: 0;
+}
+
+.courses ul li {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.courses ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: var(--main-color);
+  font-size: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media (max-width: 767px) {
+  .recent-activity {
+    padding: 1rem;
+  }
+  .recent-activity .block {
+    padding: 1rem;
+  }
+  .experinces table th,
+  .experinces table td {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+
+
+@media (min-width: 992px) {
+  main > .content {
+    display: flex;
+    gap: 3rem;
+  }
+}
+main .heading-title {
+  font-size: 2rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 992px) {
+  main {
+    padding: 1.25rem 0;
+  }
+  main .filter-section {
+    flex-basis: 320px;
+    margin-bottom: 0;
+  }
+}
+
+main .filter-section h3 {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+main .filter-choices {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid var(--black-color);
+  border-radius: 10px;
+
+  background-color: white;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+main .filter-choices > *:not(:last-child) {
+  border-left: 1px solid var(--black-color);
+}
+main .filter-choices > * {
+  padding-inline: 1rem;
+  padding-block: 1rem;
+}
+
+main .filter-choices > *:hover {
+  transition-duration: 400ms;
+  cursor: pointer;
+  border-radius: 10px;
+  color: var(--white-color);
+  background-color: var(--black-color);
+}
+
+main form > * {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+main form input {
+  width: 100%;
+  min-height: 35px;
+  border: 1px solid var(--black-color);
+  border-radius: 9px;
+  padding: 0.5rem 1rem;
+
+  outline: var(--main-color);
+}
+
+/* End Filter Section */
+
+/* Start jobs */
+
+.jobs-section {
+  display: grid;
+  flex: 1;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  place-items: center;
+
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+
+@media (min-width: 992px) {
+  .jobs-section {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+.jobs-section .job {
+  max-width: 350px;
+  background-color: white;
+  border-radius: 15px;
+}
+@media (min-width: 992px) {
+  .jobs-section .job {
+    max-width: 420px;
+  }
+}
+.jobs-section .job img {
+  width: 100%;
+  border-start-start-radius: 15px;
+}
+
+.jobs-section .content {
+  padding: 1rem;
+}
+@media (min-width: 992px) {
+  .jobs-section .content {
+    display: flex;
+  }
+}
+.jobs-section .titles > * {
+  margin-bottom: 0.5rem;
+}
+
+.jobs-section .job-title {
+  color: var(--main-color);
+  font-size: 1.5rem;
+}
+.jobs-section .company-title {
+  font-size: 1.25rem;
+}
+
+.jobs-section .job .keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.job .keyword {
+  text-align: center;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  border-radius: 36px;
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+.job .description {
+  font-size: 0.75rem;
+  max-width: 180px;
+}
+
+.job a {
+  width: fit-content;
+  position: relative;
+  margin-right: auto;
+}
+.job a::before {
+  content: "إعرض المزيد";
+  position: absolute;
+  bottom: 5px;
+  left: 100px;
+  transform: translateX(-50%);
+  min-width: 100px;
+
+  color: var(--white-color);
+
+  z-index: 1000;
+}
+.job a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-top: 30px solid transparent;
+  border-bottom: 50px solid var(--black-color);
+
+  z-index: 1;
+}
+.job a:hover::after {
+  border-bottom: 50px solid var(--main-color);
+}
+@media (max-width: 992px) {
+  .job a::before {
+    left: 60px;
+    min-width: 100px;
+    color: var(--white-color);
+    z-index: 1000;
+    font-size: 0.65rem;
+  }
+  .job a::after {
+    content: "";
+    left: 30px;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid var(--black-color);
+    z-index: 1;
+  }
+  .job a:hover::after {
+    border-bottom: 30px solid var(--main-color);
+  }
+}
+
+/* End jobs */
