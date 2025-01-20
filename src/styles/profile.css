@@ -296,6 +296,14 @@ main section {
   color: #fff;
 }
 
+.experinces.brown table th {
+  background-color: var(--secondary-color);
+  color: var(--black-color);
+}
+.experinces.brown h2 {
+  color: var(--black-color);
+}
+
 .experinces table tr:nth-child(odd) {
   background-color: #f9f9f9;
 }

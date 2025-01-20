@@ -1,3 +1,38 @@
+<?php
+
+$skills = ["HTML", "CSS", "JavaScript", "PHP", "MySQL"];
+$about = "أنا مطور ويب محترف، أعمل في مجال تطوير الويب منذ 5 سنوات.";
+$email = "ehab1nmy@gmail.com";
+$phone = "+966 123 456 789";
+$linkedin = "https://www.linkedin.com/in/username";
+$jobs = [
+    [
+        "title" => "مطور ويب",
+        "company" => "شركة أ",
+        "duration" => "4 شهور"
+    ],
+    [
+        "title" => "مطور ويب",
+        "company" => "شركة ب",
+        "duration" => "2 شهور"
+    ]
+];
+$prevJobs = [
+    [
+        "title" => "مطور ويب",
+        "company" => "شركة أ",
+        "duration" => "4 شهور",
+        "company_id" => 1
+    ],
+    [
+        "title" => "مطور ويب",
+        "company" => "شركة ب",
+        "duration" => "2 شهور",
+        "company_id" => 2
+    ]
+];
+$corses = ["دورة تطوير الويب", "دورة تصميم الواجهات"];
+?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -38,29 +73,30 @@
                      contacts -->
                     <div class="block about">
                         <h2>نبذة</h2>
-                        <p>أنا مطور ويب محترف، أعمل في مجال تطوير الويب منذ 5 سنوات.</p>
+                        <p><?php echo $about; ?></p>
                     </div>
                     <div class="block skills">
                         <h2>المهارات</h2>
                         <ul>
-                            <li>HTML</li>
-                            <li>CSS</li>
-                            <li>JavaScript</li>
-                            <li>PHP</li>
+                            <?php
+                            foreach ($skills as $skill) {
+                                echo "<li>$skill</li>";
+                            }
+                            ?>
                         </ul>
                     </div>
                     <div class="block contacts">
                         <h2>معلومات الاتصال</h2>
                         <ul>
                             <li>البريد الإلكتروني:
-                                <a href="mailto:feny@eny.sa">feny@eny.sa</a>
+                                <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
                             </li>
                             <li>رقم الهاتف:
-                                <a href="tel:+966123456789">+966 123 456 789</a>
+                                <a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a>
                             </li>
                             <!-- linkedin -->
                             <li>لينكد إن:
-                                <a href="https://www.linkedin.com/in/username" target="_blank">Feny</a>
+                                <a href="<?php echo $linkedin; ?>"><?php echo $linkedin; ?></a>
                              </li>
                         </ul>
                 </section>
@@ -70,9 +106,11 @@
                     <div class="block history">
                         <h2>السجل</h2>
                         <ul>
-                            <!-- the name will be inside a green box but the monthes will be outside -->
-                            <li><span class="company">شركة أ</span> 4 شهور</li>
-                            <li><span class="company">شركة ب</span> 2 شهور</li>
+                            <?php
+                            foreach ($prevJobs as $job) {
+                                echo "<li><span class='company'><a href='./company.php?id={$job["company_id"]}'>{$job["company"]}</a></span> {$job["duration"]}</li>";
+                            }
+                            ?>
                              
                         </ul>
                     </div>
@@ -84,23 +122,27 @@
                                 <th>الشركة</th>
                                 <th>المدة</th>
                             </tr>
-                            <tr>
-                                <td>مطور ويب</td>
-                                <td>شركة أ</td>
-                                <td>4 شهور</td>
-                            </tr>
-                            <tr>
-                                <td>مطور ويب</td>
-                                <td>شركة ب</td>
-                                <td>2 شهور</td>
-                            </tr>
+                            <?php
+                            foreach ($jobs as $job) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $job["title"]; ?></td>
+                                    <td><?php echo $job["company"]; ?></td>
+                                    <td><?php echo $job["duration"]; ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </table>
                     </div>
                     <div class="block courses">
                         <h2>الدورات والشهادات</h2>
                         <ul>
-                            <li>دورة تطوير الويب</li>
-                            <li>دورة تصميم الواجهات</li>
+                            <?php
+                            foreach ($corses as $cours) {
+                                echo "<li>$cours</li>";
+                            }
+                            ?>
                         </ul>
                     </div>
 
