@@ -146,7 +146,7 @@
 
   <div class="links">
     <button class="register-company" onclick="location.href='تسجيل_الشركات.html'">تسجيل الشركات<span class="arrow">→</span></button>
-    <button class="login" onclick="location.href='تسجيل_الدخول.html'">تسجيل الدخول<span class="arrow">→</span></button>
+    <button class="login" onclick="location.href='تسجيل_الدخول.html'">تسجيل الدخول<span class="arrow">&LeftArrowBar;</span></button>
   </div>
 </div>
 
