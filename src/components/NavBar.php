@@ -22,7 +22,7 @@ if (isset($customNavList)) {
 <?php if (isset($navList) && is_array($navList)): ?>
   <nav class="main-navigation">
     <a href="./index.php" class="logo-link">
-      <img src="Logo.png" alt="موسمي">
+      موسمي
     </a>
 
     <ul>

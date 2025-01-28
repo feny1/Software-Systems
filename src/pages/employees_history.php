@@ -50,86 +50,71 @@
             </form>
 
           </div>
-          <div class="jobs-section">
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
 
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
 
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
+          <table class="table">
+                <thead>
+                    <tr>
+                        <th>الموظف</th>
+                        <th>الإيميل</th>
+                        <th>تاريخ البداية</th>
+                        <th>تاريخ النهاية</th>
+                        <th>المسمى الوظيفي</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>محمد احمد</td>
+                        <td>email@gmail.com</td>
+                        <td>1-12-2024</td>
+                        <td>01-12-2025</td>
+                        <td>خدمة عملاء</td>
+                        <td class="actions">
+                            <button class="details">إظهار التفاصيل</button>
+                            <button class="delete">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>محمد احمد</td>
+                        <td>email@gmail.com</td>
+                        <td>1-12-2024</td>
+                        <td>01-12-2025</td>
+                        <td>خدمة عملاء</td>
+                        <td class="actions">
+                            <button class="details">إظهار التفاصيل</button>
+                            <button class="delete">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>محمد احمد</td>
+                        <td>email@gmail.com</td>
+                        <td>1-12-2024</td>
+                        <td>01-12-2025</td>
+                        <td>خدمة عملاء</td>
+                        <td class="actions">
+                            <button class="details">إظهار التفاصيل</button>
+                            <button class="delete">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>محمد احمد</td>
+                        <td>email@gmail.com</td>
+                        <td>1-12-2024</td>
+                        <td>01-12-2025</td>
+                        <td>خدمة عملاء</td>
+                        <td class="actions">
+                            <button class="details">إظهار التفاصيل</button>
+                            <button class="delete">حذف</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
           </div>
         </div>
+
       </main>
     </section>
 

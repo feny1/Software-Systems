@@ -165,133 +165,41 @@ main form input {
 
 /* End Filter Section */
 
-/* Start jobs */
-
-.jobs-section {
-  display: grid;
-  flex: 1;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  place-items: center;
-
-  overflow-y: scroll;
-  max-height: 80vh;
-}
-
-@media (min-width: 992px) {
-  .jobs-section {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  }
-}
-.jobs-section .job {
-  max-width: 350px;
-  background-color: white;
-  border-radius: 15px;
-}
-@media (min-width: 992px) {
-  .jobs-section .job {
-    max-width: 420px;
-  }
-}
-.jobs-section .job img {
+/* Employees History List */
+.table {
   width: 100%;
-  border-start-start-radius: 15px;
+  background-color: #fff;
+  border-collapse: collapse;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.jobs-section .content {
-  padding: 1rem;
-}
-@media (min-width: 992px) {
-  .jobs-section .content {
-    display: flex;
-  }
-}
-.jobs-section .titles > * {
-  margin-bottom: 0.5rem;
-}
-
-.jobs-section .job-title {
-  color: var(--main-color);
-  font-size: 1.5rem;
-}
-.jobs-section .company-title {
-  font-size: 1.25rem;
-}
-
-.jobs-section .job .keywords {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.job .keyword {
+.table th, .table td {
+  padding: 15px;
   text-align: center;
-  padding: 0.25rem;
-  font-size: 0.75rem;
-  border-radius: 36px;
-  background-color: var(--secondary-color);
-  color: var(--white-color);
+  border-bottom: 1px solid #ccc;
 }
 
-.job .description {
-  font-size: 0.75rem;
-  max-width: 180px;
+.table th {
+  background-color: #f3f3f3;
 }
 
-.job a {
-  width: fit-content;
-  position: relative;
-  margin-right: auto;
-}
-.job a::before {
-  content: "إعرض المزيد";
-  position: absolute;
-  bottom: 5px;
-  left: 100px;
-  transform: translateX(-50%);
-  min-width: 100px;
-
-  color: var(--white-color);
-
-  z-index: 1000;
-}
-.job a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 30px;
-  width: 0;
-  height: 0;
-  border-left: 80px solid transparent;
-  border-right: 80px solid transparent;
-  border-top: 30px solid transparent;
-  border-bottom: 50px solid var(--black-color);
-
-  z-index: 1;
-}
-.job a:hover::after {
-  border-bottom: 50px solid var(--main-color);
-}
-@media (max-width: 992px) {
-  .job a::before {
-    left: 60px;
-    min-width: 100px;
-    color: var(--white-color);
-    z-index: 1000;
-    font-size: 0.65rem;
-  }
-  .job a::after {
-    content: "";
-    left: 30px;
-    border-left: 55px solid transparent;
-    border-right: 55px solid transparent;
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid var(--black-color);
-    z-index: 1;
-  }
-  .job a:hover::after {
-    border-bottom: 30px solid var(--main-color);
-  }
+.actions button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-/* End jobs */
+.actions .details {
+  background-color: #D2B48C;
+  color: white;
+}
+
+.actions .delete {
+  background-color: #034C3C;
+  color: white;
+}
+/* End of Employees Histroy List */
