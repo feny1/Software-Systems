@@ -11,6 +11,7 @@
 body {
   background-color: var(--white-color);
 }
+
 .nav-icon {
   --color: var(--white-alt-color);
   background-color: var(--color);
@@ -140,7 +141,8 @@ main .filter-choices > * {
   padding-block: 1rem;
 }
 
-main .filter-choices > *:hover {
+main .filter-choices > *:hover,
+main .filter-choices .active {
   transition-duration: 400ms;
   cursor: pointer;
   border-radius: 10px;
@@ -204,6 +206,7 @@ main form input {
 @media (min-width: 992px) {
   .jobs-section .content {
     display: flex;
+    gap: 1.5rem;
   }
 }
 .jobs-section .titles > * {

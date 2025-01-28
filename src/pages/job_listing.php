@@ -1,14 +1,18 @@
+<?php include "../database/sample.php" ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/job_listing.css">
-  <title>Document</title>
+  <title>عرض الوظائف</title>
+  <script src="../javascript/jobListing.js" defer></script>
 </head>
+
 <body>
   <section class="page-structure">
-      <?php include "../components/NavBar.php" ?>
+    <?php include "../components/NavBar.php" ?>
     <section class="page-content">
       <header>
         <div class="username">
@@ -37,95 +41,40 @@
               التصفية
             </h3>
             <div class="filter-choices">
-              <p>التصفية الأولى</p>
-              <p>التصفية الثانية</p>
+              <p>تطوع موسمي</p>
+              <p>وظيفة موسمية</p>
             </div>
 
             <form action="post">
               <label for="company-name">البحث عن اسم شركة: </label>
-              <input type="text" name="company-name">
+              <input id="search" type="text" name="company-name">
             </form>
           </div>
           <div class="jobs-section">
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
+            <?php foreach ($jobs as $job): ?>
+              <div class="job">
+                <img src="../images/sampleJob.png" alt="job image">
+                <div class="content">
+                  <div class="titles">
+                    <h2 class="job-title"><?php echo $job["name"] ?></h2>
+                    <h3 class="company-title"><?php echo $job["company"] ?></h3>
+                    <div class="keywords">
+                      <?php foreach ($job["keywords"] as $keyword): ?>
+                        <span class="keyword"><?php echo $keyword ?></span>
+                      <?php endforeach ?>
+                    </div>
+                    <h3 class="job-type"><?php echo $job["type"] ?></h3>
                   </div>
+                  <p class="description"><?php echo $job["description"] ?> </p>
                 </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
+                <a href="#"></a>
               </div>
-              <a href="#"></a>
-            </div>
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
-            <div class="job">
-              <img src="../images/sampleJob.png" alt="job image">
-              <div class="content">
-                <div class="titles">
-                  <h2 class="job-title">اسم الوظيفة</h2>
-                  <h3 class="company-title">اسم الشركة</h3>
-                  <div class="keywords">
-                    <span class="keyword">الكلمة المفتاحية 1</span>
-                    <span class="keyword">الكلمة المفتاحية 2</span>
-                  </div>
-                </div>
-                <p class="description">وظيفة موسمية براتب مجزي وبدلات و بيئة متطورة و الخ... </p>
-              </div>
-              <a href="#"></a>
-            </div>
+            <?php endforeach ?>
           </div>
         </div>
       </main>
     </section>
   </section>
 </body>
+
 </html>
