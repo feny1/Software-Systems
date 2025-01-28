@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       color: #fff;
-      background-image: url('../iamges/الحرم.jpg'); 
+      background-image: url('../images/الحرم.jpg'); 
       background-size: cover; 
       background-position: center; 
       display: flex;
