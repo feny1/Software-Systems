@@ -22,7 +22,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('../images/Rectangle\ 1.png');
+            background-image: url("../images/Rectangle\ 1.png");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
