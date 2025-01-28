@@ -20,7 +20,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-image: url('images/Rectangle\ 1.png');
+                background-image: url("../images/Rectangle\ 1.png");
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -193,12 +193,12 @@
 
         <div class="social-buttons">
             <button class="social-btn google-btn">
-                <img src="images/googleSVGlogo.svg" alt="Google">
+                <img src="../images/googleSVGlogo.svg" alt="Google">
                 جوجل
             </button>
 
             <button class="social-btn x-btn">
-                <img src="images/xSVGlogo.svg" alt="X">
+                <img src="../images/xSVGlogo.svg" alt="X">
                 اكس
             </button>
         </div>
