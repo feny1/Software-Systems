@@ -1,3 +1,31 @@
+<?php 
+
+$employee = [
+  [
+      "name" => "ايهاب يار",
+      "email" => "ehab@gmail.com",
+      "start_date" => "2023-01-01",
+      "end_date" => "2025-01-01",
+      "job_title" => "Full Stack Dev"
+  ],
+  [
+      "name" => "أحمد سندي",
+      "email" => "ahmad@gmail.com",
+      "start_date" => "2023-01-01",
+      "end_date" => "2025-01-01",
+      "job_title" => "Full Stack Dev"
+  ],
+  [
+      "name" => "محمد علي",
+      "email" => "mohammedali@gmail.com",
+      "start_date" => "2023-01-01",
+      "end_date" => "2025-01-01",
+      "job_title" => "خدمة عملاء"
+  ]
+
+];
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -64,50 +92,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>محمد احمد</td>
-                        <td>email@gmail.com</td>
-                        <td>1-12-2024</td>
-                        <td>01-12-2025</td>
-                        <td>خدمة عملاء</td>
-                        <td class="actions">
-                            <button class="details">إظهار التفاصيل</button>
-                            <button class="delete">حذف</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>محمد احمد</td>
-                        <td>email@gmail.com</td>
-                        <td>1-12-2024</td>
-                        <td>01-12-2025</td>
-                        <td>خدمة عملاء</td>
-                        <td class="actions">
-                            <button class="details">إظهار التفاصيل</button>
-                            <button class="delete">حذف</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>محمد احمد</td>
-                        <td>email@gmail.com</td>
-                        <td>1-12-2024</td>
-                        <td>01-12-2025</td>
-                        <td>خدمة عملاء</td>
-                        <td class="actions">
-                            <button class="details">إظهار التفاصيل</button>
-                            <button class="delete">حذف</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>محمد احمد</td>
-                        <td>email@gmail.com</td>
-                        <td>1-12-2024</td>
-                        <td>01-12-2025</td>
-                        <td>خدمة عملاء</td>
-                        <td class="actions">
-                            <button class="details">إظهار التفاصيل</button>
-                            <button class="delete">حذف</button>
-                        </td>
-                    </tr>
+
+                <?php foreach ($employee as $emp): ?>
+                <tr>
+                  <td><?php echo $emp['name']; ?></td>
+                  <td><?php echo $emp['email']; ?></td>
+                  <td><?php echo $emp['start_date']; ?></td>
+                  <td><?php echo $emp['end_date']; ?></td>
+                  <td><?php echo $emp['job_title']; ?></td>
+                  <td class="actions">
+                    <button class="details">إظهار التفاصيل</button>
+                    <button class="delete">حذف</button>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+
                 </tbody>
             </table>
 
