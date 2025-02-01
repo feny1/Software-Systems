@@ -88,6 +88,13 @@ main {
 main .filter-section {
   margin-bottom: 3rem;
 }
+
+#filter-btn {
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+}
+
 @media (min-width: 992px) {
   main > .content {
     display: flex;
