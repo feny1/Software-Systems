@@ -1,0 +1,187 @@
+@import url(globals.css);
+
+body, html {
+    margin: 0%;
+    font-family: "IBM Plex Sans", sans-serif;
+
+}
+/*-------------------Container-------------------*/
+.container{
+    display: flex; 
+    min-height: 100vh; 
+    width: 100vw; 
+    border-width: 0px;
+}
+/*-------------------Heading-------------------*/
+.heading{
+    background: linear-gradient(to top, #d2c9bf,#e0e5e3);
+    width:25%;
+    min-height: 100vh; 
+    justify-content: center; /* Center horizontally */
+    right: 0;
+    top: 0;
+}
+.heading h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #2B3344;
+    text-align: center;
+    font-size: 3vw;
+}
+.heading h2 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #2B3344;
+    font-size: 1.5vw;
+    font-weight: normal;
+    display: flex;
+    gap: 2%;
+}
+/*-------------------Sign Up-------------------*/
+.sign-up {
+    width: 100%;
+    min-height: 100vh; 
+    background: rgb(218, 236, 232);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#daece8", endColorstr="#fbf3e6", GradientType=1);
+    background: -moz-linear-gradient(45deg, rgba(218, 236, 232, 1) 30%, rgba(251, 243, 230, 1) 100%);
+    background: -webkit-linear-gradient(45deg, rgba(218, 236, 232, 1) 30%, rgba(251, 243, 230, 1) 100%);
+    background: linear-gradient(45deg, rgba(218, 236, 232, 1) 30%, rgba(251, 243, 230, 1) 100%);
+}
+
+.sign-up h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #2B3344;
+    font-size: 3vw;
+    margin-right: 5%;
+    height: fit-content;
+    margin-bottom: 2%;
+}
+/*-------------------buttons-------------------*/
+#websites{
+    display: flex;
+    margin-right: 3%;
+    text-align: center;
+}
+#websites a{
+    background-color: #2B3344; /* Dark blue-gray */
+    color: #ffffff; /* White text */
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size:2vw; ;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex; /* Allows centering */
+    align-items: center;
+    justify-content: center;
+    gap:15%; /* Space between icon and text */
+    text-decoration: none; /* Removes underline */
+    margin-right: 3%;
+}
+/* SVG Styling */
+#websites a svg {
+    width: 24px;
+    height: 24px;
+    fill: white; /* Ensure SVG color matches text */
+}
+
+/* Hover Effect */
+#websites a:hover {
+    background-color: #1f2937; /* Darker shade */
+}
+
+/* Click Effect */
+#websites a:active {
+    transform: scale(0.97);
+}
+
+/* Focus (for Accessibility) */
+#websites a:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Disabled Style */
+#websites a.disabled {
+    background-color: #6b7280;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/*-------------------or line-------------------*/
+.or-line{
+    display: flex;
+    align-items: center;
+    font-size: larger;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.or-line::before,
+.or-line::after {
+content: "";
+flex: 1; /* Adjusts the line length */
+height: 2px; /* Thickness of the line */
+background-color: #034C3C; /* Line color */
+margin: 0 10px; /* Space between line and text */
+}
+/*-------------------Form-------------------*/
+/* Form Styling */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align labels and inputs to the right */
+    width: 50%;
+    margin-right: 5%; /* Adjust position */
+}
+
+/* Label Styling */
+.form label {
+    font-size: 1.2rem;
+    color: #2B3344;
+    margin-bottom: 2px;
+    text-align: right;
+    width: 100%;
+    font-size: 190% !important;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* Input Field Styling */
+.form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    text-align: right; /* Ensure text aligns to the right */
+    font-size: 1rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* Error Message Styling */
+.form p {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    text-align: right;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* Button Styling */
+#submitBtn {
+    background-color: #034C3C;
+    color: white;
+    font-size:  250%;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 6%; /* Adds space between form and button */
+    margin-right: 6%; /* Aligns button with form */
+    transition: 0.3s;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+#submitBtn:hover {
+    background-color: #1f2937;
+}
