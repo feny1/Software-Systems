@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * now we need exception handling
@@ -10,13 +10,17 @@
 
 include '../database/fetch.php';
 $company_id = $_GET['coid'] ?? '';
-$result =fetchAllEmployeesByCompanyID($company_id);
+if ($company_id === '') {
+  header("Loaction /index.php");
+}
+$result = fetchAllEmployeesByCompanyID($company_id);
 $employee = $result['emplyees'];
 // echo '<h1>'.$result['success'].'</h1>';
 ?>
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,12 +32,12 @@ $employee = $result['emplyees'];
       const searchInput = document.getElementById("search");
       const employees = document.querySelectorAll(".employee-row");
 
-      let filterType = "name"; 
+      let filterType = "name";
 
       filterChoices.forEach((choice) => {
-        choice.addEventListener("click", function () {
+        choice.addEventListener("click", function() {
           filterChoices.forEach((choice) => choice.classList.remove("active"));
-    
+
           this.classList.add("active");
 
           filterType = this.dataset.filter;
@@ -51,7 +55,7 @@ $employee = $result['emplyees'];
         });
       });
 
-      searchInput.addEventListener("input", function () {
+      searchInput.addEventListener("input", function() {
         const search = searchInput.value.toLowerCase();
 
         employees.forEach((employee) => {
@@ -71,6 +75,7 @@ $employee = $result['emplyees'];
     });
   </script>
 </head>
+
 <body>
   <section class="page-structure">
     <?php include "../components/NavBar.php"; ?>
@@ -111,37 +116,41 @@ $employee = $result['emplyees'];
               <input type="text" id="search" placeholder="ابحث بالاسم">
             </form>
           </div>
-
-          <table class="table">
-            <thead>
-              <tr>
-                <th>الموظف</th>
-                <th>الإيميل</th>
-                <th>تاريخ البداية</th>
-                <th>تاريخ النهاية</th>
-                <th>المسمى الوظيفي</th>
-                <th>الإجراءات</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($employee as $emp): ?>
-                <tr class="employee-row">
-                  <td class="employee-name"><?= $emp['user_name'] ?></td>
-                  <td class="employee-email"><?= $emp['email'] ?></td>
-                  <td><?= $emp['start'] ?></td>
-                  <td><?= $emp['end']??'لا زال على رأس العمل' ?></td>
-                  <td><?= $emp['name'] ?></td>
-                  <td class="actions">
-                    <button class="details">إظهار التفاصيل</button>
-                    <button class="delete">حذف</button>
-                  </td>
+          <?php if (count($employee)  === 0): ?>
+            <h3 class="prev">لا يوجد موظفين سابقين</h3>
+          <?php else: ?>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>الموظف</th>
+                  <th>الإيميل</th>
+                  <th>تاريخ البداية</th>
+                  <th>تاريخ النهاية</th>
+                  <th>المسمى الوظيفي</th>
+                  <th>الإجراءات</th>
                 </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <?php foreach ($employee as $emp): ?>
+                  <tr class="employee-row">
+                    <td class="employee-name"><?= $emp['user_name'] ?></td>
+                    <td class="employee-email"><?= $emp['email'] ?></td>
+                    <td><?= $emp['start'] ?></td>
+                    <td><?= $emp['end'] ?? 'لا زال على رأس العمل' ?></td>
+                    <td><?= $emp['name'] ?></td>
+                    <td class="actions">
+                      <button class="details">إظهار التفاصيل</button>
+                      <button class="delete">حذف</button>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          <?php endif; ?>
         </div>
       </main>
     </section>
   </section>
 </body>
+
 </html>

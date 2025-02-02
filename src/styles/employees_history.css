@@ -167,7 +167,8 @@ main form input {
 /* End Filter Section */
 
 /* Employees History List */
-.table {
+.table,
+.prev {
   width: 100%;
   background-color: #fff;
   border-collapse: collapse;
@@ -176,7 +177,13 @@ main form input {
   overflow: hidden;
 }
 
-.table th, .table td {
+.prev {
+  display: grid;
+  place-items: center;
+}
+
+.table th,
+.table td {
   padding: 15px;
   text-align: center;
   border-bottom: 1px solid #ccc;
@@ -195,12 +202,12 @@ main form input {
 }
 
 .actions .details {
-  background-color: #D2B48C;
+  background-color: #d2b48c;
   color: white;
 }
 
 .actions .delete {
-  background-color: #034C3C;
+  background-color: #034c3c;
   color: white;
 }
 /* End of Employees Histroy List */
