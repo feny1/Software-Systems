@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>موسمي</title>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       color: #fff;
-      background-image: url('./images/الحرم.jpg');
+      background-image: url('../images/Rectangle\ 1.png');
+      background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
       display: flex;
@@ -20,29 +27,31 @@
     }
 
     .header {
+      display: flex;
+      justify-content: space-between;
       background-color: rgba(3, 76, 60, 1);
-      padding: 10px 15px;
+      padding: 0 32px;
       text-align: right;
       position: relative;
     }
 
+    .header h1 {
+      padding: 12px 0;
+    }
+
     .register-individual {
+      display: block;
       background-color: #D2B48C;
-      color: #034C3C;
-      padding: 10px 30px;
+      color: #ffffff;
       border: none;
-      border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.3s ease;
-      position: absolute;
-      top: 10px;
-      left: 15px;
+      padding: 5px 15px;
       font-size: 18px;
     }
 
     .register-individual:hover {
       background-color: #C2A57A;
-      transform: translateY(-3px);
     }
 
     .hero {
@@ -112,7 +121,6 @@
       }
 
       .register-individual {
-        position: static;
         margin: 10px 0;
       }
 
@@ -139,7 +147,7 @@
 <body>
 
   <div class="header">
-    <h1 style="display: inline;">موسمي</h1>
+    <h1>موسمي</h1>
     <button class="register-individual" onclick="location.href='./pages/signin.php'">تسجيل الأفراد</button>
   </div>
 
