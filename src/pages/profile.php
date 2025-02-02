@@ -1,9 +1,11 @@
 <?php
-
-$skills = ["HTML", "CSS", "JavaScript", "PHP", "MySQL"];
-$about = "أنا مطور ويب محترف، أعمل في مجال تطوير الويب منذ 5 سنوات.";
-$email = "ehab1nmy@gmail.com";
-$phone = "+966 123 456 789";
+session_start();
+include '../database/fetch.php';
+$user = $_SESSION['user'];
+$skills = fetchAllSkillsNameByUserID($user['id']);
+$about = $user['bio'];
+$email = $user['email'];
+$phone = $user['phone'];
 $linkedin = "https://www.linkedin.com/in/username";
 $jobs = [
     [
@@ -50,8 +52,7 @@ $corses = ["دورة تطوير الويب", "دورة تصميم الواجها
                 <div class="username">
                     <img class="profile-pic" src="../images/profile.svg" alt="صورة المستخدم">
                     <div class="user">
-                        <h2>اسم المستخدم</h2>
-                        <h3>التخصص</h3>
+                        <h2><?= $user['name']?></h2>
                     </div>
                 </div>
                 <div class="options">

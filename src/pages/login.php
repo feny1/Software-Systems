@@ -1,3 +1,38 @@
+<?php
+session_start();
+
+if(isset($_SESSION['user'])){
+    header("Location: profile.php"); // Redirect after successful login
+    exit();
+
+}
+
+include '../database/fetch.php';
+
+$error = $_SESSION['error']?? '';
+$_SESSION['error'] = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!empty($_POST['email']) && !empty($_POST['password'])) {
+        $user = login($_POST['email'], $_POST['password']);
+
+        if (isset($user['error'])) {
+            $error = $user['error']; // Display error
+            $_SESSION['error'] = $error;
+
+            header("Location: login.php"); // Redirect after successful login
+            exit();
+        } else {
+            $_SESSION['user'] = $user;
+            header("Location: profile.php"); // Redirect after successful login
+            exit();
+        }
+    } else {
+        $error = "يرجى إدخال البريد الإلكتروني وكلمة المرور.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -179,41 +214,45 @@
 
 <body>
 
-    <div class="login-container">
-        <h1>تسجيل الدخول</h1>
 
-        <div class="form-group">
-            <label>الإيميل او أسم المستخدم</label>
-            <input type="text" class="form-control" required>
+    <form method="post" action="#">
+        <div class="login-container">
+        <h1><?= $error ?></h1>
+            <h1>تسجيل الدخول</h1>
+
+            <div class="form-group">
+                <label>الإيميل</label>
+                <input name="email" type="email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input name="password" type="password" class="form-control" required>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">اظهار كلمة المرور</label>
+            </div>
+
+            <div class="social-buttons">
+                <button class="social-btn google-btn">
+                    <img src="../images/googleSVGlogo.svg" alt="Google">
+                    جوجل
+                </button>
+
+                <button class="social-btn x-btn">
+                    <img src="../images/xSVGlogo.svg" alt="X">
+                    اكس
+                </button>
+            </div>
+
+            <div class="action-buttons">
+                <button type="submit" class="login-btn">تسجيل الدخول</button>
+                <button class="back-btn">العودة للخلف</button>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>كلمة المرور</label>
-            <input type="password" class="form-control" required>
-        </div>
-
-        <div class="checkbox-group">
-            <input type="checkbox" id="showPassword">
-            <label for="showPassword">اظهار كلمة المرور</label>
-        </div>
-
-        <div class="social-buttons">
-            <button class="social-btn google-btn">
-                <img src="../images/googleSVGlogo.svg" alt="Google">
-                جوجل
-            </button>
-
-            <button class="social-btn x-btn">
-                <img src="../images/xSVGlogo.svg" alt="X">
-                اكس
-            </button>
-        </div>
-
-        <div class="action-buttons">
-            <button class="login-btn">تسجيل الدخول</button>
-            <button class="back-btn">العودة للخلف</button>
-        </div>
-    </div>
+    </form>
 
 </body>
 

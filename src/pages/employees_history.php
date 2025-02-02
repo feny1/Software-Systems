@@ -1,28 +1,18 @@
 <?php 
 
-$employee = [
-  [
-      "name" => "ايهاب يار",
-      "email" => "ehab@gmail.com",
-      "start_date" => "2023-01-01",
-      "end_date" => "2025-01-01",
-      "job_title" => "Full Stack Dev"
-  ],
-  [
-      "name" => "أحمد سندي",
-      "email" => "ahmad@gmail.com",
-      "start_date" => "2023-01-01",
-      "end_date" => "2025-01-01",
-      "job_title" => "Full Stack Dev"
-  ],
-  [
-      "name" => "محمد علي",
-      "email" => "mohammedali@gmail.com",
-      "start_date" => "2023-01-01",
-      "end_date" => "2025-01-01",
-      "job_title" => "خدمة عملاء"
-  ]
-];
+/**
+ * now we need exception handling
+ * 1- if there's no parameters in the url 
+ * 2- if the company id is wrong
+ * 3- if i want to search by job id rather than comapny id
+ * 4- if job id is wrong
+ */
+
+include '../database/fetch.php';
+$company_id = $_GET['coid'] ?? '';
+$result =fetchAllEmployeesByCompanyID($company_id);
+$employee = $result['emplyees'];
+// echo '<h1>'.$result['success'].'</h1>';
 ?>
 
 <!DOCTYPE html>
@@ -136,11 +126,11 @@ $employee = [
             <tbody>
               <?php foreach ($employee as $emp): ?>
                 <tr class="employee-row">
-                  <td class="employee-name"><?php echo $emp['name']; ?></td>
-                  <td class="employee-email"><?php echo $emp['email']; ?></td>
-                  <td><?php echo $emp['start_date']; ?></td>
-                  <td><?php echo $emp['end_date']; ?></td>
-                  <td><?php echo $emp['job_title']; ?></td>
+                  <td class="employee-name"><?= $emp['user_name'] ?></td>
+                  <td class="employee-email"><?= $emp['email'] ?></td>
+                  <td><?= $emp['start'] ?></td>
+                  <td><?= $emp['end']??'لا زال على رأس العمل' ?></td>
+                  <td><?= $emp['name'] ?></td>
                   <td class="actions">
                     <button class="details">إظهار التفاصيل</button>
                     <button class="delete">حذف</button>

@@ -1,5 +1,5 @@
 <?php
-$db = new SQLite3('./database/database.db');
+$db = new SQLite3('./database.db');
 
 // Create tables with foreign key constraints
 $db->exec('CREATE TABLE IF NOT EXISTS users (
@@ -17,58 +17,41 @@ $db->exec('CREATE TABLE IF NOT EXISTS languages (
     name TEXT
 )');
 
-$db->exec('CREATE TABLE IF NOT EXISTS cv (
-    cv_id INTEGER PRIMARY KEY, 
-    user_id INTEGER,
-    introduction TEXT, 
-    linkedin TEXT, 
-    location TEXT,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-)');
-
-$db->exec('CREATE TABLE IF NOT EXISTS language_cv (
-    language_cv_id INTEGER PRIMARY KEY, 
-    cv_id INTEGER, 
-    language_id INTEGER,
-    FOREIGN KEY (cv_id) REFERENCES cv(cv_id) ON DELETE CASCADE,
-    FOREIGN KEY (language_id) REFERENCES languages(language_id) ON DELETE CASCADE
-)');
-
 $db->exec('CREATE TABLE IF NOT EXISTS skills (
     skill_id INTEGER PRIMARY KEY, 
-    cv_id INTEGER,
+    user_id INTEGER,
     name TEXT,
     soft INTEGER,
-    FOREIGN KEY (cv_id) REFERENCES cv(cv_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )');
 
 $db->exec('CREATE TABLE IF NOT EXISTS education (
     education_id INTEGER PRIMARY KEY, 
-    cv_id INTEGER,
+    user_id INTEGER,
     name TEXT,
     start DATE,
     end DATE NULL,
-    FOREIGN KEY (cv_id) REFERENCES cv(cv_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )');
 
 $db->exec('CREATE TABLE IF NOT EXISTS experience (
     experience_id INTEGER PRIMARY KEY, 
-    cv_id INTEGER,
+    user_id INTEGER,
     name TEXT,
     description TEXT,
     company TEXT,
     years INTEGER,
     start DATE,
-    FOREIGN KEY (cv_id) REFERENCES cv(cv_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )');
 
 $db->exec('CREATE TABLE IF NOT EXISTS certificates (
     certificate_id INTEGER PRIMARY KEY, 
-    cv_id INTEGER,
+    user_id INTEGER,
     name TEXT,
     description TEXT,
     company TEXT,
-    FOREIGN KEY (cv_id) REFERENCES cv(cv_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )');
 
 $db->exec('CREATE TABLE IF NOT EXISTS company (
@@ -103,4 +86,5 @@ $db->exec('CREATE TABLE IF NOT EXISTS employees (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE
 )');
+
 ?>
