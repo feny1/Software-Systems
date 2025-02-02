@@ -148,7 +148,7 @@
 
   <div class="header">
     <h1>موسمي</h1>
-    <button class="register-individual" onclick="location.href='./signip.php'">تسجيل الأفراد</button>
+    <button class="register-individual" onclick="location.href='./signup.php'">تسجيل الأفراد</button>
   </div>
 
   <div class="hero">
