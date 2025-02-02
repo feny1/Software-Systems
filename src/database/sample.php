@@ -1,6 +1,6 @@
 <?php
 $db = new SQLite3('./database.db');
-
+include 'fetch.php';
 // Check if there are existing users
 $result = $db->query('SELECT COUNT(*) as count FROM users');
 $row = $result->fetchArray(SQLITE3_ASSOC);
@@ -52,4 +52,3 @@ if ($row['count'] == 0) {
 } else {
     echo "Database already contains data. No new records were added.";
 }
-?>

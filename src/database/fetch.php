@@ -1,6 +1,5 @@
 <?php
 $db = new SQLite3('../database/database.db');
-
 function fetchAllUsers()
 {
     global $db;
@@ -202,4 +201,3 @@ WHERE company.company_id = $id;
     ];
     return $result;
 }
-?>

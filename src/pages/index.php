@@ -148,7 +148,7 @@
 
   <div class="header">
     <h1>موسمي</h1>
-    <button class="register-individual" onclick="location.href='./pages/signin.php'">تسجيل الأفراد</button>
+    <button class="register-individual" onclick="location.href='./signip.php'">تسجيل الأفراد</button>
   </div>
 
   <div class="hero">
@@ -156,8 +156,8 @@
     <h3>نعمل على توفير الوظائف و العروض المتميزة بسهولة.</h3>
 
     <div class="links">
-      <button class="register-company" onclick="location.href='./pages/signin.php'">تسجيل الشركات<span class="arrow">→</span></button>
-      <button class="login" onclick="location.href='./pages/login.php'">تسجيل الدخول<span class="arrow">&LeftArrowBar;</span></button>
+      <button class="register-company" onclick="location.href='./signup.php'">تسجيل الشركات<span class="arrow">→</span></button>
+      <button class="login" onclick="location.href='./login.php'">تسجيل الدخول<span class="arrow">&LeftArrowBar;</span></button>
     </div>
   </div>
 

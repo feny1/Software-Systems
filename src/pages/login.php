@@ -1,15 +1,14 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     header("Location: profile.php"); // Redirect after successful login
     exit();
-
 }
 
 include '../database/fetch.php';
 
-$error = $_SESSION['error']?? '';
+$error = $_SESSION['error'] ?? '';
 $_SESSION['error'] = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -217,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <form method="post" action="#">
         <div class="login-container">
-        <h1><?= $error ?></h1>
+            <h1><?= $error ?></h1>
             <h1>تسجيل الدخول</h1>
 
             <div class="form-group">

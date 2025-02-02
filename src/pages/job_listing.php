@@ -1,4 +1,8 @@
-<?php include "../database/sample.php" ?>
+<?php
+// include "../database/sample.php";
+include "../database/fetch.php";
+$jobs = fetchAllJobs();
+?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -57,12 +61,7 @@
                 <div class="content">
                   <div class="titles">
                     <h2 class="job-title"><?php echo $job["name"] ?></h2>
-                    <h3 class="company-title"><?php echo $job["company"] ?></h3>
-                    <div class="keywords">
-                      <?php foreach ($job["keywords"] as $keyword): ?>
-                        <span class="keyword"><?php echo $keyword ?></span>
-                      <?php endforeach ?>
-                    </div>
+                    <h3 class="company-title"><?php $job["company_id"] ?></h3>
                     <h3 class="job-type"><?php echo $job["type"] ?></h3>
                   </div>
                   <p class="description"><?php echo $job["description"] ?> </p>
