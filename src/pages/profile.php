@@ -49,20 +49,20 @@ $corses = ["دورة تطوير الويب", "دورة تصميم الواجها
     <section class="page-structure">
         <?php include "../components/NavBar.php" ?>
         <section class="page-content">
-                <div class="username">
-                    <img class="profile-pic" src="../images/profile.svg" alt="صورة المستخدم">
-                    <div class="user">
-                        <h2><?= $user['name']?></h2>
-                    </div>
+            <div class="username">
+                <img class="profile-pic" src="../images/profile.svg" alt="صورة المستخدم">
+                <div class="user">
+                    <h2><?= $user['name'] ?></h2>
                 </div>
-                <div class="options">
-                    <a href="#">
-                        <img class="nav-icon" src="../images/settings.svg" alt="شعار الإعدادت">
-                    </a>
-                    <a href="#">
-                        <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل الخروج">
-                    </a>
-                </div>
+            </div>
+            <div class="options">
+                <a href="#">
+                    <img class="nav-icon" src="../images/settings.svg" alt="شعار الإعدادت">
+                </a>
+                <a href="#">
+                    <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل الخروج">
+                </a>
+            </div>
             <header>
             </header>
 
@@ -98,7 +98,7 @@ $corses = ["دورة تطوير الويب", "دورة تصميم الواجها
                             <!-- linkedin -->
                             <li>لينكد إن:
                                 <a href="<?php echo $linkedin; ?>"><?php echo $linkedin; ?></a>
-                             </li>
+                            </li>
                         </ul>
                 </section>
 
@@ -112,7 +112,7 @@ $corses = ["دورة تطوير الويب", "دورة تصميم الواجها
                                 echo "<li><span class='company'><a href='./company.php?id={$job["company_id"]}'>{$job["company"]}</a></span> {$job["duration"]}</li>";
                             }
                             ?>
-                             
+
                         </ul>
                     </div>
                     <div class="block experinces">
@@ -147,7 +147,7 @@ $corses = ["دورة تطوير الويب", "دورة تصميم الواجها
                         </ul>
                     </div>
 
-                     
+
                 </section>
             </main>
         </section>

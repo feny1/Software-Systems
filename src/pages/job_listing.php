@@ -1,5 +1,6 @@
 <?php
-// include "../database/sample.php";
+// include "../database/sample.php"; -- use this for one time
+session_start();
 include "../database/fetch.php";
 $jobs = fetchAllJobs();
 ?>

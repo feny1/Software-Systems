@@ -1,4 +1,6 @@
 <?php
+include "../database/fetch.php";
+session_start();
 $id = $_GET["id"] ?? 'No id specified';
 $name = "اسم الشركة" . $id;
 $specialty = "التخصص";
@@ -40,7 +42,7 @@ $prevJobs = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/profile.css">
-    <title><?php echo $name;?></title>
+    <title><?php echo $name; ?></title>
 </head>
 
 <body>
@@ -52,7 +54,7 @@ $prevJobs = [
                 "title" => "الموظفين",
                 "icon" => "profile.svg",
                 "alt" => "الموظفين",
-                "link" => "./my_employees.php"
+                "link" => "./employees_history.php"
             ]
         ];
 

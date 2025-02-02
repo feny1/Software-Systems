@@ -201,3 +201,18 @@ WHERE company.company_id = $id;
     ];
     return $result;
 }
+
+function fetchUserCompany($id)
+{
+    global $db;
+    $result = $db->query("SELECT * FROM company WHERE owner_id = $id");
+    $company = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $company[] = $row;
+    }
+    $result = [
+        "company" => $company,
+        "success" => isset($company[0]) ? "data fetched successfuly" : "wrong id"
+    ];
+    return $company[0];
+}

@@ -7,7 +7,7 @@
  * 3- if i want to search by job id rather than comapny id
  * 4- if job id is wrong
  */
-
+session_start();
 include '../database/fetch.php';
 $company_id = $_GET['coid'] ?? '';
 if ($company_id === '') {
