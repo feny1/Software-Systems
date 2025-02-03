@@ -1,12 +1,10 @@
 <?php
-session_start();
+include ('../components/page.php');
 
-if (isset($_SESSION['user'])) {
-    header("Location: profile.php"); // Redirect after successful login
+if (isset($_SESSION['user']) && isset($_SESSION["user"]["type"])) {
+    header("Location: profile.php"); // Redirect if already logged in
     exit();
 }
-
-include '../database/fetch.php';
 
 $error = $_SESSION['error'] ?? '';
 $_SESSION['error'] = '';
@@ -19,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = $user['error']; // Display error
             $_SESSION['error'] = $error;
 
-            header("Location: login.php"); // Redirect after successful login
+            header("Location: login.php"); // Redirect after failed login
             exit();
         } else {
             $_SESSION['user'] = $user;
@@ -34,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,8 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: -webkit-linear-gradient(45deg, rgba(218, 236, 232, 1) 30%, rgba(251, 243, 230, 1) 100%);
             background: linear-gradient(45deg, rgba(218, 236, 232, 1) 30%, rgba(251, 243, 230, 1) 100%);
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#daece8", endColorstr="#fbf3e6", GradientType=1);
-
-
             position: relative;
             padding: 2.5rem;
             border-radius: 10px;
@@ -179,7 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .back-btn,
-        .login-btn {
+        .login-btn,
+        .signup-btn {
             flex: 1;
             padding: 0.8rem;
             border: none;
@@ -200,6 +196,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: white;
         }
 
+        .signup-btn {
+            background-color: #028482; /* Adjust color as needed */
+            color: white;
+        }
+
         .back-btn:hover {
             background-color: #dfdfdf;
         }
@@ -207,16 +208,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .login-btn:hover {
             background-color: #023629;
         }
-    </style>
 
+        .signup-btn:hover {
+            background-color: #026e70;
+        }
+    </style>
 </head>
 
 <body>
-
-
     <form method="post" action="#">
         <div class="login-container">
-            <h1><?= $error ?></h1>
+            <?php if (!empty($error)) : ?>
+                <h1><?= $error ?></h1>
+            <?php endif; ?>
             <h1>تسجيل الدخول</h1>
 
             <div class="form-group">
@@ -235,12 +239,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
 
             <div class="social-buttons">
-                <button class="social-btn google-btn">
+                <button class="social-btn google-btn" type="button">
                     <img src="../images/googleSVGlogo.svg" alt="Google">
                     جوجل
                 </button>
 
-                <button class="social-btn x-btn">
+                <button class="social-btn x-btn" type="button">
                     <img src="../images/xSVGlogo.svg" alt="X">
                     اكس
                 </button>
@@ -248,11 +252,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="action-buttons">
                 <button type="submit" class="login-btn">تسجيل الدخول</button>
-                <button class="back-btn">العودة للخلف</button>
+                <button type="button" class="signup-btn" onclick="window.location.href='signup.php'">تسجيل جديد</button>
+                <button type="button" class="back-btn" onclick="window.history.back()">العودة للخلف</button>
             </div>
         </div>
     </form>
 
+    <script>
+        // Simple show/hide password functionality
+        const showPasswordCheckbox = document.getElementById('showPassword');
+        const passwordInput = document.querySelector('input[name="password"]');
+        showPasswordCheckbox.addEventListener('change', function () {
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+    </script>
 </body>
-
 </html>

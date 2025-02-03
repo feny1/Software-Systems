@@ -1,29 +1,35 @@
 <?php
-$user = $_SESSION["user"];
-$navList = [
-  [
-    "title" => "الملف",
-    "icon" => "cv.svg",
-    "alt" => "شعار السيرة الذاتية",
-    "link" => "./profile.php"
-  ],
+$user = $_SESSION["user"] ?? null;
+$navList = $navList ?? [
+
 ];
 
 // if user is employee or company owner
-if ($user["type"] === true) {
-  array_push($navList, [
-    "title" => "الوظائف",
-    "icon" => "jobs.svg",
-    "alt" => "شعار الوظائف",
-    "link" => "./job_listing.php"
-  ]);
-} else {
-  array_push($navList, [
-    "title" => "الشركة",
-    "icon" => "company.svg",
-    "alt" => "شعار الشركات",
-    "link" => "./company.php"
-  ]);
+if (isset($user) && isset($user["type"])) {
+  array_push(
+    $navList,
+    [
+      "title" => "الملف",
+      "icon" => "cv.svg",
+      "alt" => "شعار السيرة الذاتية",
+      "link" => "./profile.php"
+    ]
+  );
+  if ($user["type"] == 0) {
+    array_push($navList, [
+      "title" => "الوظائف",
+      "icon" => "jobs.svg",
+      "alt" => "شعار الوظائف",
+      "link" => "./job_listing.php"
+    ]);
+  } else {
+    array_push($navList, [
+      "title" => "الشركة",
+      "icon" => "company.svg",
+      "alt" => "شعار الشركات",
+      "link" => "./company.php"
+    ]);
+  }
 }
 
 if (isset($customNavList)) {

@@ -1,5 +1,5 @@
 <?php
-$db = new SQLite3('./database.db');
+$db = new SQLite3('../database/database.db');
 
 // Create tables with foreign key constraints
 $db->exec('CREATE TABLE IF NOT EXISTS users (
@@ -9,6 +9,7 @@ $db->exec('CREATE TABLE IF NOT EXISTS users (
     password TEXT, 
     bio TEXT,
     type BOOLEAN,
+    linkedin TEXT,
     phone TEXT
 )');
 

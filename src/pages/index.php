@@ -1,3 +1,7 @@
+<?php
+include ('../components/page.php');
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 

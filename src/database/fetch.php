@@ -1,5 +1,5 @@
 <?php
-$db = new SQLite3('../database/database.db');
+include('../database/data.php');
 function fetchAllUsers()
 {
     global $db;
@@ -9,6 +9,25 @@ function fetchAllUsers()
         $users[] = $row;
     }
     return $users;
+}
+function getUserById($id)
+{
+    global $db;
+    
+    // Prepare the SQL statement with a parameter placeholder for the id
+    $stmt = $db->prepare('SELECT * FROM users WHERE id = :id');
+    
+    // Bind the id value to the placeholder. Use SQLITE3_INTEGER if id is an integer.
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+    
+    // Execute the statement
+    $result = $stmt->execute();
+    
+    // Fetch the user data as an associative array
+    $user = $result->fetchArray(SQLITE3_ASSOC);
+    
+    // Return the user data (or false/null if not found)
+    return $user;
 }
 
 function custom_password_verify($pass, $hash)
@@ -215,4 +234,47 @@ function fetchUserCompany($id)
         "success" => isset($company[0]) ? "data fetched successfuly" : "wrong id"
     ];
     return $company[0];
+}
+
+function signup($name, $email, $password, $bio = null, $type = 0, $phone = null)
+{
+    global $db;
+    
+    // Check if a user with the same email already exists
+    $stmt = $db->prepare('SELECT id FROM users WHERE email = :email');
+    $stmt->bindValue(':email', $email, SQLITE3_TEXT);
+    $result = $stmt->execute();
+    
+    if ($result->fetchArray(SQLITE3_ASSOC)) {
+        // Email already registered, you can choose to return false or handle it differently
+        return false;
+    }
+    
+    // Hash the password securely using password_hash
+    // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    
+    // Prepare the INSERT statement
+    $stmt = $db->prepare('
+        INSERT INTO users (name, email, password, bio, type, phone) 
+        VALUES (:name, :email, :password, :bio, :type, :phone)
+    ');
+    
+    // Bind parameters to the statement
+    $stmt->bindValue(':name', $name, SQLITE3_TEXT);
+    $stmt->bindValue(':email', $email, SQLITE3_TEXT);
+    $stmt->bindValue(':password', $password, SQLITE3_TEXT);
+    $stmt->bindValue(':bio', $bio, SQLITE3_TEXT);
+    $stmt->bindValue(':type', $type, SQLITE3_INTEGER);
+    $stmt->bindValue(':phone', $phone, SQLITE3_TEXT);
+    
+    // Execute the statement
+    $result = $stmt->execute();
+    
+    if ($result) {
+        // Return the new user's id on success
+        return $db->lastInsertRowID();
+    }
+    
+    // Insertion failed, return false or handle the error accordingly
+    return false;
 }

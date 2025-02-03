@@ -1,6 +1,7 @@
 <?php
-include "../database/fetch.php";
-session_start();
+include ('../components/page.php');
+?>
+<?php
 $id = $_GET["id"] ?? 'No id specified';
 $name = "اسم الشركة" . $id;
 $specialty = "التخصص";

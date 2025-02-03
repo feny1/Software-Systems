@@ -1,6 +1,7 @@
 <?php
-include "../database/data.php";
-session_start();
+include ('../components/page.php');
+?>
+<?php
 
 if (!isset($_SESSION["user"]) || $_SESSION["user"]["type"] != 1) {  // type 2 is for company users
   header("location: ../index.php");

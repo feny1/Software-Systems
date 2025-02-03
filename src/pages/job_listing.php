@@ -1,7 +1,7 @@
 <?php
-// include "../database/sample.php"; -- use this for one time
-session_start();
-include "../database/fetch.php";
+include ('../components/page.php');
+?>
+<?php
 $jobs = fetchAllJobs();
 ?>
 <!DOCTYPE html>
