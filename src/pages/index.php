@@ -14,6 +14,11 @@ include ('../components/page.php');
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      text-decoration: none;
+    }
+
+    a {
+      display: block;
     }
 
     body {
@@ -30,6 +35,16 @@ include ('../components/page.php');
       height: 100vh;
     }
 
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(20, 49, 43, 0.3);
+      filter: blur(10px);
+      z-index: -1;
+    }
+
     .header {
       display: flex;
       justify-content: space-between;
@@ -44,7 +59,8 @@ include ('../components/page.php');
     }
 
     .register-individual {
-      display: block;
+      display: flex;
+      align-items: center;
       background-color: #D2B48C;
       color: #ffffff;
       border: none;
@@ -69,11 +85,11 @@ include ('../components/page.php');
     }
 
     .hero h1 {
-      font-size: 36px;
+      font-size: 64px;
     }
 
     .hero p {
-      font-size: 20px;
+      font-size: 40px;
     }
 
     .links {
@@ -83,6 +99,7 @@ include ('../components/page.php');
       margin-top: 20px;
     }
 
+
     .register-company {
       background-color: #034C3C;
       color: #ffffff;
@@ -91,7 +108,7 @@ include ('../components/page.php');
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 18px;
+      font-size: 24px;
     }
 
     .register-company:hover {
@@ -101,13 +118,13 @@ include ('../components/page.php');
 
     .login {
       background-color: #2B3344;
-      color: #D2B48C;
+      color: var(--white-color);
       padding: 10px 30px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 18px;
+      font-size: 24px;
     }
 
     .login:hover {
@@ -152,7 +169,7 @@ include ('../components/page.php');
 
   <div class="header">
     <h1>موسمي</h1>
-    <button class="register-individual" onclick="location.href='./signup.php'">تسجيل الأفراد</button>
+    <a href="../pages/signup.php" class="register-individual">تسجيل الأفراد</a>
   </div>
 
   <div class="hero">
@@ -160,8 +177,8 @@ include ('../components/page.php');
     <h3>نعمل على توفير الوظائف و العروض المتميزة بسهولة.</h3>
 
     <div class="links">
-      <button class="register-company" onclick="location.href='./signup.php'">تسجيل الشركات<span class="arrow">→</span></button>
-      <button class="login" onclick="location.href='./login.php'">تسجيل الدخول<span class="arrow">&LeftArrowBar;</span></button>
+      <a href="../pages/signup.php" class="register-company">تسجيل الشركات</a>
+      <a href="../pages/login.php" class="login">تسجيل الدخول</a>
     </div>
   </div>
 

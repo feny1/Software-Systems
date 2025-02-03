@@ -91,9 +91,6 @@ $employee = $result['emplyees'];
         </div>
         <div class="options">
           <a href="#">
-            <img class="nav-icon" src="../images/settings.svg" alt="شعار الإعدادات">
-          </a>
-          <a href="#">
             <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل">
           </a>
         </div>
@@ -115,8 +112,9 @@ $employee = $result['emplyees'];
 
             <form>
               <label for="search">البحث :</label>
-              <input type="text" id="search" placeholder="ابحث بالاسم">
-            </form>
+              <input type="text" id="search" placeholder="<?php echo count($employee) === 0 ? "لا يوجد موظفين للبحث" : "ابحث بالاسم" ?>" disabled=<?php if (count($employee) === 0): ?> disabled <?php endif; ?>">
+              <
+                </form>
           </div>
           <?php if (count($employee)  === 0): ?>
             <h3 class="prev">لا يوجد موظفين سابقين</h3>

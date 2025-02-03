@@ -207,6 +207,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                 <span class="edit-btn" onclick="toggleEdit('about')">[تعديل]</span>
               <?php endif; ?>
             </div>
+<<<<<<< HEAD
             <?php if ($isOwner): ?>
               <div id="aboutEdit" class="edit-form" style="display: none;">
                 <form method="POST" action="">
@@ -232,6 +233,12 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
               <?php if ($isOwner): ?>
                 <span class="edit-btn" onclick="toggleEdit('skills')">[تعديل المهارات]</span>
               <?php endif; ?>
+=======
+            <div class="options">
+                <a href="#">
+                    <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل الخروج">
+                </a>
+>>>>>>> 5e525f54c160c8dff4e8a0757d7864804c393a0a
             </div>
             <?php if ($isOwner): ?>
               <div id="skillsEdit" class="edit-form" style="display: none;">
