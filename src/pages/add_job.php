@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $lang_stmt->bindValue(':lang_name', $job_language, SQLITE3_TEXT);
   $lang_result = $lang_stmt->execute();
   $lang_row = $lang_result->fetchArray(SQLITE3_ASSOC);
-  $language_id = $lang_row['language_id'];
+  // $language_id = $lang_row['language_id'];
 
   // Get the company_id for the current user
   $company_stmt = $db->prepare("SELECT company_id FROM company WHERE owner_id = :user_id OR hr_id = :user_id");
