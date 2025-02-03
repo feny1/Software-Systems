@@ -182,43 +182,77 @@ function fetchAllEmployees()
     }
     return $employees;
 }
-function fetchAllEmployeesByJobID()
+function fetchAllEmployeesByJobID($job_id)
 {
-    global $db;
-    $result = $db->query('SELECT * FROM employees');
-    $employees = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-        $employees[] = $row;
+    if (empty($job_id) || !is_numeric($job_id)) {
+        throw new Exception("Invalid job ID!");
     }
-    return $employees;
-}
-function fetchAllEmployeesByCompanyID($id)
-{
-    if ($id === '') {
+    
+    global $db;
+    
+    $query = "SELECT employees.*, 
+                     users.name AS user_name, 
+                     users.email, 
+                     jobs.*, 
+                     company.name AS company_name 
+              FROM employees
+              JOIN users ON employees.user_id = users.id
+              JOIN jobs ON employees.job_id = jobs.job_id
+              JOIN company ON jobs.company_id = company.company_id
+              WHERE jobs.job_id = $job_id;";
+    
+    $result = $db->query($query);
 
-        $result = [
-            "emplyees" => [],
-            "success" => "wrong id"
-        ];
-        return $result;
-    }
-    global $db;
-    $result = $db->query("SELECT employees.*, users.name AS user_name, users.email, jobs.*, company.name AS company_name 
-FROM employees
-JOIN users ON employees.user_id = users.id
-JOIN jobs ON employees.job_id = jobs.job_id
-JOIN company ON jobs.company_id = company.company_id
-WHERE company.company_id = $id;
-");
     $employees = [];
     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         $employees[] = $row;
     }
-    $result = [
-        "emplyees" => $employees,
-        "success" => isset($employees[0]) ? "data fetched successfuly" : "wrong id"
+    
+    if (empty($employees)) {
+        throw new Exception("No employees found for job ID: $job_id.");
+    }
+    
+    return [
+        "employees" => $employees,
+        "success"   => "Data fetched successfully"
     ];
-    return $result;
+}
+
+
+
+function fetchAllEmployeesByCompanyID($company_id)
+{
+    if (empty($company_id) || !is_numeric($company_id)) {
+        throw new Exception("Invalid company ID!");
+    }
+    
+    global $db;
+
+    $query = "SELECT employees.*, 
+                     users.name AS user_name, 
+                     users.email, 
+                     jobs.*, 
+                     company.name AS company_name 
+              FROM employees
+              JOIN users ON employees.user_id = users.id
+              JOIN jobs ON employees.job_id = jobs.job_id
+              JOIN company ON jobs.company_id = company.company_id
+              WHERE company.company_id = $company_id;";
+    
+    $result = $db->query($query);
+    $employees = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $employees[] = $row;
+    }
+    
+    if (empty($employees)) {
+        throw new Exception("No employees found for company ID: $company_id.");
+    }
+    
+    return [
+        "employees" => $employees,
+        "success"   => "Data fetched successfully"
+    ];
 }
 
 function fetchUserCompany($id)

@@ -4,20 +4,22 @@ include ('../components/page.php');
 
 <?php
 
-/**
- * now we need exception handling
- * 1- if there's no parameters in the url 
- * 2- if the company id is wrong
- * 3- if i want to search by job id rather than comapny id
- * 4- if job id is wrong
- */
-$company_id = $_GET['coid'] ?? '';
-if ($company_id === '') {
-  header("Loaction /index.php");
+try {
+  
+  if (isset($_GET['job_id'])) {
+      $employeeData = fetchAllEmployeesByJobID($_GET['job_id']);
+  } elseif (isset($_GET['company_id'])) {
+      $employeeData = fetchAllEmployeesByCompanyID($_GET['company_id']);
+  } else {
+      throw new Exception("No parameters provided in the URL.");
+  }
+  
+  $employee = $employeeData["employees"];
+  $success_message = $employeeData["success"];
+} catch (Exception $e) {
+  $error_message = $e->getMessage();
+  $employee = [];
 }
-$result = fetchAllEmployeesByCompanyID($company_id);
-$employee = $result['emplyees'];
-// echo '<h1>'.$result['success'].'</h1>';
 ?>
 
 <!DOCTYPE html>
