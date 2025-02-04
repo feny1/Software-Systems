@@ -257,17 +257,21 @@ function fetchAllEmployeesByCompanyID($company_id)
 
 function fetchUserCompany($id)
 {
-    global $db;
-    $result = $db->query("SELECT * FROM company WHERE owner_id = $id");
-    $company = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-        $company[] = $row;
+    if (!$id) {
+        return null;
     }
-    $result = [
-        "company" => $company,
-        "success" => isset($company[0]) ? "data fetched successfuly" : "wrong id"
-    ];
-    return $company[0];
+
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM company WHERE owner_id = :id OR hr_id = :id");
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+    $result = $stmt->execute();
+
+    if (!$result) {
+        return null;
+    }
+
+    $row = $result->fetchArray(SQLITE3_ASSOC);
+    return $row ?: null;
 }
 
 function signup($name, $email, $password, $bio = null, $type = 0, $phone = null)

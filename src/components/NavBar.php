@@ -2,7 +2,10 @@
 $user = $_SESSION["user"] ?? null;
 $navList = $navList ?? [];
 
-$companyID = fetchUserCompany($user["id"]);
+$companyID = null;
+if ($user) {
+  $companyID = fetchUserCompany($user["id"]);
+}
 
 
 if (isset($user) && isset($user["type"])) {
@@ -22,7 +25,7 @@ if (isset($user) && isset($user["type"])) {
       "alt" => "شعار الوظائف",
       "link" => "./job_listing.php"
     ]);
-  } else {
+  } else if ($companyID) {
     array_push($navList, [
       "title" => "الشركة",
       "icon" => "company.svg",
@@ -54,11 +57,11 @@ if (isset($customNavList)) {
       <?php endforeach; ?>
     </ul>
 
-    <?php if ($current_page !== "job_listing.php"): ?>
-      <div class="view-jobs-container">
-        <a href="./job_listing.php" class="view-jobs-btn">عرض الوظائف</a>
-      </div>
-    <?php endif; ?>
+    <!-- <?php if ($current_page !== "job_listing.php"): ?> -->
+    <div class="view-jobs-container">
+      <a href="./job_listing.php" class="view-jobs-btn">عرض الوظائف</a>
+    </div>
+    <!-- <?php endif; ?> -->
 
   </nav>
 <?php else: ?>

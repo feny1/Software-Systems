@@ -217,7 +217,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                     <div class="block about">
                         <h2>نبذة</h2>
                         <div id="aboutDisplay">
-                            <p><?= htmlspecialchars($about) ?></p>
+                            <p><?= $about ?></p>
                             <?php if ($isOwner): ?>
                                 <span class="edit-btn" onclick="toggleEdit('about')">[تعديل]</span>
                             <?php endif; ?>
@@ -225,7 +225,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                         <?php if ($isOwner): ?>
                             <div id="aboutEdit" class="edit-form" style="display: none;">
                                 <form method="POST" action="">
-                                    <textarea name="bio" rows="4"><?= htmlspecialchars($about) ?></textarea>
+                                    <textarea name="bio" rows="4"><?= $about ?></textarea>
                                     <input type="hidden" name="update_about" value="1">
                                     <br>
                                     <button type="submit">حفظ</button>
@@ -241,7 +241,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                         <div id="skillsDisplay">
                             <ul>
                                 <?php foreach ($skills as $skill): ?>
-                                    <li><?= htmlspecialchars($skill) ?></li>
+                                    <li><?= $skill ?></li>
                                 <?php endforeach; ?>
                             </ul>
                             <?php if ($isOwner): ?>
@@ -267,13 +267,13 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                         <div id="contactDisplay">
                             <ul>
                                 <li>البريد الإلكتروني:
-                                    <a href="mailto:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a>
+                                    <a href="mailto:<?= $email ?>"><?= $email ?></a>
                                 </li>
                                 <li>رقم الهاتف:
-                                    <a href="tel:<?= htmlspecialchars($phone) ?>"><?= htmlspecialchars($phone) ?></a>
+                                    <a href="tel:<?= $phone ?>"><?= $phone ?></a>
                                 </li>
                                 <li>لينكد إن:
-                                    <a href="<?= htmlspecialchars($linkedin) ?>"><?= htmlspecialchars($linkedin) ?></a>
+                                    <a href="<?= $linkedin ?>"><?= $linkedin ?></a>
                                 </li>
                             </ul>
                             <?php if ($isOwner): ?>
