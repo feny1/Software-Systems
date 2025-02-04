@@ -5,7 +5,6 @@ $navList = $navList ?? [];
 $companyID = fetchUserCompany($user["id"]);
 
 
-// if user is employee or company owner
 if (isset($user) && isset($user["type"])) {
   array_push(
     $navList,
@@ -54,6 +53,13 @@ if (isset($customNavList)) {
         </li>
       <?php endforeach; ?>
     </ul>
+
+    <?php if ($current_page !== "job_listing.php"): ?>
+      <div class="view-jobs-container">
+        <a href="./job_listing.php" class="view-jobs-btn">عرض الوظائف</a>
+      </div>
+    <?php endif; ?>
+
   </nav>
 <?php else: ?>
   <nav class="main-navigation">
