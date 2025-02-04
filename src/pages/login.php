@@ -1,5 +1,5 @@
 <?php
-include ('../components/page.php');
+include('../components/page.php');
 
 if (isset($_SESSION['user']) && isset($_SESSION["user"]["type"])) {
     header("Location: profile.php"); // Redirect if already logged in
@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -197,7 +198,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .signup-btn {
-            background-color: #028482; /* Adjust color as needed */
+            background-color: #028482;
+            /* Adjust color as needed */
             color: white;
         }
 
@@ -238,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="showPassword">اظهار كلمة المرور</label>
             </div>
 
-            <div class="social-buttons">
+            <!-- <div class="social-buttons">
                 <button class="social-btn google-btn" type="button">
                     <img src="../images/googleSVGlogo.svg" alt="Google">
                     جوجل
@@ -248,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <img src="../images/xSVGlogo.svg" alt="X">
                     اكس
                 </button>
-            </div>
+            </div> -->
 
             <div class="action-buttons">
                 <button type="submit" class="login-btn">تسجيل الدخول</button>
@@ -262,9 +264,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Simple show/hide password functionality
         const showPasswordCheckbox = document.getElementById('showPassword');
         const passwordInput = document.querySelector('input[name="password"]');
-        showPasswordCheckbox.addEventListener('change', function () {
+        showPasswordCheckbox.addEventListener('change', function() {
             passwordInput.type = this.checked ? 'text' : 'password';
         });
     </script>
 </body>
+
 </html>

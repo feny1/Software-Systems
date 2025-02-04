@@ -74,3 +74,7 @@ nav.main-navigation ul .nav-path {
   transition-duration: 200ms;
   background-color: var(--white-color);
 }
+
+.edit-form {
+  background-color: #034c3c;
+}

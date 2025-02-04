@@ -5,84 +5,86 @@ include('../components/page.php');
 
 // Process form submission if the request method is POST.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve and trim form inputs
-    $username        = trim($_POST['username'] ?? '');
-    $email           = trim($_POST['email'] ?? '');
-    $password        = $_POST['password'] ?? '';
-    $confirmPassword = $_POST['confirm-password'] ?? '';
-    // Retrieve the account type (0 for individual, 1 for company)
-    $type            = $_POST['type'] ?? '0';
+  // Retrieve and trim form inputs
+  $username        = trim($_POST['username'] ?? '');
+  $email           = trim($_POST['email'] ?? '');
+  $password        = $_POST['password'] ?? '';
+  $confirmPassword = $_POST['confirm-password'] ?? '';
+  // Retrieve the account type (0 for individual, 1 for company)
+  $type            = $_POST['type'] ?? '0';
 
-    // Basic server-side validation
-    $errors = [];
+  // Basic server-side validation
+  $errors = [];
 
-    if (empty($username)) {
-        $errors[] = "اسم المستخدم مطلوب.";
+  if (empty($username)) {
+    $errors[] = "اسم المستخدم مطلوب.";
+  }
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "البريد الإلكتروني غير صالح.";
+  }
+  if ($password !== $confirmPassword) {
+    $errors[] = "كلمة المرور غير متطابقة.";
+  }
+  // (Add any additional validations as needed.)
+
+  if (empty($errors)) {
+    // Call the signup function.
+    // Adjust the parameters according to your signup function signature.
+    // For example, if your signup() accepts: signup($name, $email, $password, $bio, $type, $phone)
+    $newUserId = signup($username, $email, $password, null, $type);
+    if ($newUserId) {
+      $_SESSION['user'] = getUserById($newUserId);
+
+      // If the user signed up as a company (type 1), create a new company record
+      if ($type == '1') {
+        // Prepare a statement to insert into the company table.
+        // In this example, we use the username as the company name.
+        // You can customize the location and bio as needed.
+        $stmt = $db->prepare("INSERT INTO company (owner_id, hr_id, name, location, bio) VALUES (:owner_id, NULL, :name, '', '')");
+        $stmt->bindValue(':owner_id', $newUserId, SQLITE3_INTEGER);
+        $stmt->bindValue(':name', $username, SQLITE3_TEXT);
+        $stmt->execute();
+      }
+
+      // Signup succeeded. Redirect to the profile page.
+      header("Location: profile.php");
+      exit;
+    } else {
+      // Signup failed, likely due to duplicate email.
+      $errors[] = "فشل التسجيل. البريد الإلكتروني ربما يكون مستخدم بالفعل.";
     }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "البريد الإلكتروني غير صالح.";
-    }
-    if ($password !== $confirmPassword) {
-        $errors[] = "كلمة المرور غير متطابقة.";
-    }
-    // (Add any additional validations as needed.)
-
-    if (empty($errors)) {
-        // Call the signup function.
-        // Adjust the parameters according to your signup function signature.
-        // For example, if your signup() accepts: signup($name, $email, $password, $bio, $type, $phone)
-        $newUserId = signup($username, $email, $password, null, $type);
-        if ($newUserId) {
-            $_SESSION['user'] = getUserById($newUserId);
-
-            // If the user signed up as a company (type 1), create a new company record
-            if ($type == '1') {
-                // Prepare a statement to insert into the company table.
-                // In this example, we use the username as the company name.
-                // You can customize the location and bio as needed.
-                $stmt = $db->prepare("INSERT INTO company (owner_id, hr_id, name, location, bio) VALUES (:owner_id, NULL, :name, '', '')");
-                $stmt->bindValue(':owner_id', $newUserId, SQLITE3_INTEGER);
-                $stmt->bindValue(':name', $username, SQLITE3_TEXT);
-                $stmt->execute();
-            }
-
-            // Signup succeeded. Redirect to the profile page.
-            header("Location: profile.php");
-            exit;
-        } else {
-            // Signup failed, likely due to duplicate email.
-            $errors[] = "فشل التسجيل. البريد الإلكتروني ربما يكون مستخدم بالفعل.";
-        }
-    }
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en" style="direction: rtl">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../styles/signup.css" />
   <title>تسجيل جديد</title>
 </head>
+
 <body>
   <div class="container">
     <!-- Right-side content -->
-    <?php include ("../components/NavBar.php") ?>
-    
+    <?php include("../components/NavBar.php") ?>
+
     <!-- Left-side sign up form -->
     <div class="sign-up">
       <h1>تسجيل جديد</h1>
 
       <div id="websites">
-        <a href="sign up.html">
+        <!-- <a href="sign up.html">
           <img src="../images/googleSVGlogo.svg" alt="google" />
           جوجل
         </a>
         <a href="sign up.html">
           <img src="../images/xSVGlogo.svg" alt="X" />
           اكس
-        </a>
+        </a> -->
         <a href="../pages/login.php">لديك حساب من قبل؟</a>
       </div>
 
@@ -96,11 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <!-- Display server-side errors if they exist -->
       <?php if (!empty($errors)): ?>
-          <div class="errors" style="color:red;">
-              <?php foreach ($errors as $error): ?>
-                  <p><?php echo htmlspecialchars($error); ?></p>
-              <?php endforeach; ?>
-          </div>
+        <div class="errors" style="color:red;">
+          <?php foreach ($errors as $error): ?>
+            <p><?php echo htmlspecialchars($error); ?></p>
+          <?php endforeach; ?>
+        </div>
       <?php endif; ?>
 
       <!-- Form with method POST and action pointing to this same file -->
@@ -191,4 +193,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     });
   </script>
 </body>
+
 </html>

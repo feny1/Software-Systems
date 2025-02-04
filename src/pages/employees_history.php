@@ -1,19 +1,19 @@
 <?php
-include ('../components/page.php');
+include('../components/page.php');
 ?>
 
 <?php
 
 try {
-  
+
   if (isset($_GET['job_id'])) {
-      $employeeData = fetchAllEmployeesByJobID($_GET['job_id']);
+    $employeeData = fetchAllEmployeesByJobID($_GET['job_id']);
   } elseif (isset($_GET['company_id'])) {
-      $employeeData = fetchAllEmployeesByCompanyID($_GET['company_id']);
+    $employeeData = fetchAllEmployeesByCompanyID($_GET['company_id']);
   } else {
-      throw new Exception("No parameters provided in the URL.");
+    throw new Exception("No parameters provided in the URL.");
   }
-  
+
   $employee = $employeeData["employees"];
   $success_message = $employeeData["success"];
 } catch (Exception $e) {
@@ -88,7 +88,7 @@ try {
         <div class="username">
           <a href="./profile.php">
             <img class="nav-icon" src="../images/profile.svg" alt="شعار المستخدم">
-            <h2>اسم المستخدم</h2>
+            <h2><?php echo $user['name'] ?></h2>
           </a>
         </div>
         <div class="options">

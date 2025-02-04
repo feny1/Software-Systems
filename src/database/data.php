@@ -78,6 +78,17 @@ $db->exec('CREATE TABLE IF NOT EXISTS jobs (
     FOREIGN KEY (language_id) REFERENCES languages(language_id) ON DELETE CASCADE
 )');
 
+$db->exec('CREATE TABLE IF NOT EXISTS applications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_id INTEGER,
+    user_id INTEGER,
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)');
+$db->exec('ALTER TABLE applications ADD COLUMN status TEXT DEFAULT "pending"');
+
+
 $db->exec('CREATE TABLE IF NOT EXISTS employees (
     employee_id INTEGER PRIMARY KEY, 
     user_id INTEGER,

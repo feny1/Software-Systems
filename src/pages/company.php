@@ -16,6 +16,7 @@ $phone = $result['phone'] ?? 'غير متوفر';
 $linkedin = $result['linkedin'] ?? '#';
 
 $jobs = fetchAllCompanyJobs($company_id);
+$applications = fetchAllApplicationsForCompany($company_id);
 ?>
 
 <!DOCTYPE html>
@@ -105,6 +106,35 @@ $jobs = fetchAllCompanyJobs($company_id);
                             <?php endif; ?>
                         </table>
                     </div>
+
+
+                    <div class="block experinces">
+                        <h2>الطلبات المقدمة</h2>
+                        <table>
+                            <tr>
+                                <th>المسمى الوظيفي</th>
+                                <th>المتقدم</th>
+                                <th>الراتب</th>
+                                <th>تاريخ التقديم</th>
+                            </tr>
+                            <?php if (!empty($applications)): ?> 
+                                <?php foreach ($applications as $application): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($application["job_title"]); ?></td>
+                                        <td><?php echo htmlspecialchars($application["applicant_name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($application["salary"]); ?> ريال</td>
+                                        <td><?php echo htmlspecialchars($application["applied_at"]); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">لا توجد طلبات حتى الآن</td>
+                                </tr>
+                            <?php endif; ?>
+                        </table>
+                    </div>
+
+
                 </section>
             </main>
         </section>

@@ -304,6 +304,9 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                     <!-- History Section (السجل) - Display Only -->
                     <div class="block history">
                         <h2>السجل</h2>
+                        <?php if (count($prevJobs) === 0): ?>
+                            <h3 class="no-jobs">لا يوجد سجل سابقة</h3>
+                        <?php endif ?>
                         <ul>
                             <?php foreach ($prevJobs as $job): ?>
                                 <li>
@@ -326,52 +329,56 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                     <!-- Experiences Section with inline editing for each experience -->
                     <div class="block experinces">
                         <h2>الخبرات</h2>
-                        <table border="1" cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
-                            <tr>
-                                <th>المسمى الوظيفي</th>
-                                <th>الشركة</th>
-                                <th>المدة</th>
-                                <?php if ($isOwner): ?>
-                                    <th>الإجراءات</th>
-                                <?php endif; ?>
-                            </tr>
-                            <?php foreach ($jobs as $job): ?>
+                        <?php if (count($jobs) === 0): ?>
+                            <h3 class="no-jobs">لا يوجد خبرات سابقة</h3>
+                        <?php else: ?>
+                            <table border="1" cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
                                 <tr>
-                                    <td><?= htmlspecialchars($job['name']) ?></td>
-                                    <td><?= htmlspecialchars($job['company']) ?></td>
-                                    <td><?= htmlspecialchars($job['years']) ?> سنة</td>
+                                    <th>المسمى الوظيفي</th>
+                                    <th>الشركة</th>
+                                    <th>المدة</th>
                                     <?php if ($isOwner): ?>
-                                        <td>
-                                            <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">تعديل</button>
-                                            <form method="POST" action="" class="delete-form" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف الخبرة؟');">
-                                                <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
-                                                <input type="hidden" name="delete_experience" value="1">
-                                                <button type="submit" class="delete-btn">حذف</button>
-                                            </form>
-                                        </td>
+                                        <th>الإجراءات</th>
                                     <?php endif; ?>
                                 </tr>
-                                <?php if ($isOwner): ?>
-                                    <!-- Inline Experience Edit Row (hidden by default) -->
-                                    <tr id="expEdit-<?= $job['experience_id'] ?>" class="exp-edit-row" style="display:none;">
-                                        <td colspan="4">
-                                            <form method="POST" action="">
-                                                <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
-                                                <label>المسمى الوظيفي:</label>
-                                                <input type="text" name="exp_name" value="<?= htmlspecialchars($job['name']) ?>" required>
-                                                <label>الشركة:</label>
-                                                <input type="text" name="exp_company" value="<?= htmlspecialchars($job['company']) ?>">
-                                                <label>عدد السنوات:</label>
-                                                <input type="number" name="exp_years" value="<?= htmlspecialchars($job['years']) ?>" min="0" required>
-                                                <input type="hidden" name="update_experience" value="1">
-                                                <button type="submit">حفظ</button>
-                                                <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">إلغاء</button>
-                                            </form>
-                                        </td>
+                                <?php foreach ($jobs as $job): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($job['name']) ?></td>
+                                        <td><?= htmlspecialchars($job['company']) ?></td>
+                                        <td><?= htmlspecialchars($job['years']) ?> سنة</td>
+                                        <?php if ($isOwner): ?>
+                                            <td>
+                                                <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">تعديل</button>
+                                                <form method="POST" action="" class="delete-form" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف الخبرة؟');">
+                                                    <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
+                                                    <input type="hidden" name="delete_experience" value="1">
+                                                    <button type="submit" class="delete-btn">حذف</button>
+                                                </form>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </table>
+                                    <?php if ($isOwner): ?>
+                                        <!-- Inline Experience Edit Row (hidden by default) -->
+                                        <tr id="expEdit-<?= $job['experience_id'] ?>" class="exp-edit-row" style="display:none;">
+                                            <td colspan="4">
+                                                <form method="POST" action="">
+                                                    <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
+                                                    <label>المسمى الوظيفي:</label>
+                                                    <input type="text" name="exp_name" value="<?= htmlspecialchars($job['name']) ?>" required>
+                                                    <label>الشركة:</label>
+                                                    <input type="text" name="exp_company" value="<?= htmlspecialchars($job['company']) ?>">
+                                                    <label>عدد السنوات:</label>
+                                                    <input type="number" name="exp_years" value="<?= htmlspecialchars($job['years']) ?>" min="0" required>
+                                                    <input type="hidden" name="update_experience" value="1">
+                                                    <button type="submit">حفظ</button>
+                                                    <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">إلغاء</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </table>
+                        <?php endif ?>
                     </div>
 
                     <!-- Certificates / Courses Section with inline add, edit, and delete forms -->

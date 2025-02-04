@@ -15,6 +15,20 @@ $jobs = fetchAllJobs();
   <title>عرض الوظائف</title>
   <script src="../javascript/jobListing.js" defer></script>
 
+  <script>
+    function confirmApplication(jobId) {
+      
+        document.getElementById("popup-job-id").value = jobId;
+
+        document.getElementById("apply-popup").style.display = "flex";
+    }
+
+    function closePopup() {
+        document.getElementById("apply-popup").style.display = "none";
+    }
+</script>
+
+
   <style>
     /* Add job button */
     .add-job-container {
@@ -38,8 +52,61 @@ $jobs = fetchAllJobs();
       background-color: #026C56; 
     }
     /* End of "add job button" */
+
+      .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+  }
+
+  .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .confirm-btn {
+      background: #034C3C;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+      border-radius: 5px;
+  }
+
+  .cancel-btn {
+      background: red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+      border-radius: 5px;
+  }
+
   </style>
 </head>
+
+<div id="apply-popup" class="popup">
+    <div class="popup-content">
+        <h2>هل أنت متأكد أنك تريد التقديم على هذه الوظيفة؟</h2>
+        <form id="apply-form" action="apply.php" method="POST">
+            <input type="hidden" name="job_id" id="popup-job-id">
+            <button type="submit" class="confirm-btn">تأكيد</button>
+            <button type="button" class="cancel-btn" onclick="closePopup()">رجوع</button>
+        </form>
+    </div>
+</div>
+
 
 <body>
   <section class="page-structure">
@@ -121,7 +188,7 @@ $jobs = fetchAllJobs();
                   </div>
                   <p class="description"><?php echo $job["description"] ?> </p>
                 </div>
-                <a href="#"></a>
+                <a href="#" class="apply-now-btn" onclick="confirmApplication(<?php echo $job['job_id']; ?>)"></a>
               </div>
             <?php endforeach ?>
           </div>
