@@ -1,39 +1,21 @@
 <?php
 include ('../components/page.php');
-?>
-<?php
-$id = $_GET["id"] ?? 'No id specified';
-$name = "اسم الشركة" . $id;
-$specialty = "التخصص";
-$about = "أنا الشركة " . $id . " وأعمل في مجال " . $specialty;
-$email = "company@eny.sa";
-$phone = "+966 123 456 789";
-$linkedin = "https://www.linkedin.com/in/username";
-$jobs = [
-    [
-        "title" => "مطور ويب",
-        "start" => "2024-12-2",
-        "duration" => "4 شهور"
-    ],
-    [
-        "title" => "مطور اندرويد",
-        "start" => "2024-1-2",
-        "duration" => "2 شهور"
-    ]
-];
-$prevJobs = [
-    [
-        "title" => "جوازات",
-        "start" => "2021-12-2",
-        "duration" => "4 شهور"
-    ],
-    [
-        "title" => "مدخل بيانات",
-        "start" => "2019-1-2",
-        "duration" => "2 شهور"
-    ]
-];
+include ('../database/data.php'); 
 
+$company_id = isset($_GET["id"]) ? intval($_GET["id"]) : ($_SESSION['user']['company_id'] ?? 0);
+
+$stmt = $db->prepare("SELECT * FROM company WHERE company_id = :company_id");
+$stmt->bindValue(':company_id', $company_id, SQLITE3_INTEGER);
+$result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
+
+
+$name = $result['name'] ?? 'غير معروف';
+$specialty = $result['bio'] ?? 'لا توجد معلومات';
+$email = $result['email'] ?? 'غير متوفر';
+$phone = $result['phone'] ?? 'غير متوفر';
+$linkedin = $result['linkedin'] ?? '#';
+
+$jobs = fetchAllCompanyJobs($company_id);
 ?>
 
 <!DOCTYPE html>
@@ -71,22 +53,17 @@ $prevJobs = [
                 </div>
             </div>
             <div class="options">
-                <a href="#">
+                <a href="../pages/logout.php">
                     <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل الخروج">
                 </a>
             </div>
-            <header>
-            </header>
+            <header></header>
 
             <main>
                 <section class="profile-details">
-                    <!-- we have here three sections
-                     about
-                     skills
-                     contacts -->
                     <div class="block about">
                         <h2>نبذة</h2>
-                        <p><?php echo $about; ?></p>
+                        <p><?php echo $specialty; ?></p>
                     </div>
                     <div class="block contacts">
                         <h2>معلومات الاتصال</h2>
@@ -97,70 +74,37 @@ $prevJobs = [
                             <li>رقم الهاتف:
                                 <a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a>
                             </li>
-                            <!-- linkedin -->
                             <li>لينكد إن:
                                 <a href="<?php echo $linkedin; ?>" target="_blank"><?php echo $name; ?></a>
                             </li>
                         </ul>
+                    </div>
                 </section>
 
                 <section class="recent-activity">
-                    <!-- here we will add previus jobs and how many monthes as "history" like this ([Company A] 4 monthes   [Company B] 2 monthes) as list then add table for "experinces" and last add "courses and certifcates" each part will be in deferent section-->
-                    <!-- <div class="block history">
-                        <h2>سجل</h2>
-                        <ul>
-                            <-- the name will be inside a green box but the monthes will be outside ->
-                            <li><span class="company">شركة أ</span> 4 شهور</li>
-                            <li><span class="company">شركة ب</span> 2 شهور</li>
-
-                        </ul>
-                    </div> -->
                     <div class="block experinces">
                         <h2>الوظائف المتاحة</h2>
                         <table>
                             <tr>
                                 <th>المسمى الوظيفي</th>
-                                <th>البداية</th>
-                                <th>المدة</th>
+                                <th>الوصف</th>
+                                <th>الراتب</th>
                             </tr>
-                            <?php
-                            foreach ($jobs as $job) {
-                            ?>
+                            <?php if (!empty($jobs)): ?>
+                                <?php foreach ($jobs as $job): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($job["name"]); ?></td>
+                                        <td><?php echo htmlspecialchars($job["description"]); ?></td>
+                                        <td><?php echo htmlspecialchars($job["salary"]); ?> ريال</td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
                                 <tr>
-                                    <td><?php echo $job["title"]; ?></td>
-                                    <td><?php echo $job["start"]; ?></td>
-                                    <td><?php echo $job["duration"]; ?></td>
+                                    <td colspan="3" style="text-align: center;">لا توجد وظائف متاحة</td>
                                 </tr>
-                            <?php
-                            }
-                            ?>
+                            <?php endif; ?>
                         </table>
-
                     </div>
-                    <div class="block experinces brown">
-                        <h2>الوظائف السابقة</h2>
-                        <table>
-                            <tr>
-                                <th>المسمى الوظيفي</th>
-                                <th>البداية</th>
-                                <th>المدة</th>
-                            </tr>
-                            <?php
-                            foreach ($prevJobs as $job) {
-                            ?>
-                                <tr>
-                                    <td><?php echo $job["title"]; ?></td>
-                                    <td><?php echo $job["start"]; ?></td>
-                                    <td><?php echo $job["duration"]; ?></td>
-                                </tr>
-                            <?php
-                            }
-                            ?>
-                        </table>
-
-                    </div>
-
-
                 </section>
             </main>
         </section>

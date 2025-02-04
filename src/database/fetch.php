@@ -172,6 +172,30 @@ function fetchAllJobs()
     return $jobs;
 }
 
+function fetchAllCompanyJobs($company_id)
+{
+    global $db;
+    
+    // ✅ Ensure company_id is an integer
+    $company_id = intval($company_id);
+
+    // ✅ Prepare and execute the query to get jobs for the company
+    $stmt = $db->prepare('SELECT name, description, salary FROM jobs WHERE company_id = :company_id');
+    $stmt->bindValue(':company_id', $company_id, SQLITE3_INTEGER);
+    $result = $stmt->execute();
+
+    $jobs = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $jobs[] = $row;
+    }
+
+    return $jobs;
+}
+
+
+
+
+
 function fetchAllEmployees()
 {
     global $db;
@@ -257,21 +281,17 @@ function fetchAllEmployeesByCompanyID($company_id)
 
 function fetchUserCompany($id)
 {
-    if (!$id) {
-        return null;
-    }
-
     global $db;
-    $stmt = $db->prepare("SELECT * FROM company WHERE owner_id = :id OR hr_id = :id");
-    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-    $result = $stmt->execute();
-
-    if (!$result) {
-        return null;
+    $result = $db->query("SELECT * FROM company WHERE owner_id = $id");
+    $company = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $company[] = $row;
     }
-
-    $row = $result->fetchArray(SQLITE3_ASSOC);
-    return $row ?: null;
+    $result = [
+        "company" => $company,
+        "success" => isset($company[0]) ? "data fetched successfuly" : "wrong id"
+    ];
+    return $company[0];
 }
 
 function signup($name, $email, $password, $bio = null, $type = 0, $phone = null)

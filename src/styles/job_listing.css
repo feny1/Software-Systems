@@ -248,12 +248,13 @@ main form input {
   width: fit-content;
   position: relative;
   margin-right: auto;
+  text-align: center;
 }
 .job a::before {
-  content: "إعرض المزيد";
+  content: "تقدم الان!";
   position: absolute;
   bottom: 5px;
-  left: 100px;
+  left: 110px;
   transform: translateX(-50%);
   min-width: 100px;
 
