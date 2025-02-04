@@ -31,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $isOwner && isset($_POST['update_co
         $stmt->bindValue(':company_id', $company_id, SQLITE3_INTEGER);
         $stmt->execute();
     } elseif ($updateType === 'contact') {
-        $newEmail = $_POST['email'] ?? '';
-        $newPhone = $_POST['phone'] ?? '';
-        $newLinkedin = $_POST['linkedin'] ?? '';
+        $newEmail = isset($_POST['email']) && trim($_POST['email']) !== '' ? trim($_POST['email']) : 'لا يوجد';
+        $newPhone = isset($_POST['phone']) && trim($_POST['phone']) !== '' ? trim($_POST['phone']) : 'لا يوجد';
+        $newLinkedin = isset($_POST['linkedin']) && trim($_POST['linkedin']) !== '' ? trim($_POST['linkedin']) : 'لا يوجد';
         $stmt = $db->prepare("UPDATE company SET email = :email, phone = :phone, linkedin = :linkedin WHERE company_id = :company_id");
         $stmt->bindValue(':email', $newEmail, SQLITE3_TEXT);
         $stmt->bindValue(':phone', $newPhone, SQLITE3_TEXT);
