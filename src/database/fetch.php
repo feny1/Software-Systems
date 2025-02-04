@@ -26,10 +26,31 @@ function getUserById($id)
     // Fetch the user data as an associative array
     $user = $result->fetchArray(SQLITE3_ASSOC);
 
+    $user['company_id'] = fetchUserCompany($user['id']);
+
     // Return the user data (or false/null if not found)
     return $user;
 }
 
+function getCompanyByOwnerId($id)
+{
+    global $db;
+
+    // Prepare the SQL statement with a parameter placeholder for the id
+    $stmt = $db->prepare('SELECT * FROM companies WHERE owner_id = :id');
+
+    // Bind the id value to the placeholder. Use SQLITE3_INTEGER if id is an integer.
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+
+    // Execute the statement
+    $result = $stmt->execute();
+
+    // Fetch the user data as an associative array
+    $company = $result->fetchArray(SQLITE3_ASSOC);
+
+    // Return the user data (or false/null if not found)
+    return $company;
+}
 function custom_password_verify($pass, $hash)
 {
     return $pass === $hash;
