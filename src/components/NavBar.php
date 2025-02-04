@@ -17,15 +17,14 @@ if (isset($user) && isset($user["type"])) {
       "alt" => "شعار السيرة الذاتية",
       "link" => "./profile.php"
     ],
-  );
-  if ($user["type"] == 0) {
-    array_push($navList, [
+    [
       "title" => "الوظائف",
       "icon" => "jobs.svg",
       "alt" => "شعار الوظائف",
       "link" => "./job_listing.php"
-    ]);
-  } else if ($companyID) {
+    ]
+  );
+  if ($companyID) {
     array_push($navList, [
       "title" => "الشركة",
       "icon" => "company.svg",
@@ -57,11 +56,6 @@ if (isset($customNavList)) {
       <?php endforeach; ?>
     </ul>
 
-    <!-- <?php if ($current_page !== "job_listing.php"): ?> -->
-    <div class="view-jobs-container">
-      <a href="./job_listing.php" class="view-jobs-btn">عرض الوظائف</a>
-    </div>
-    <!-- <?php endif; ?> -->
 
   </nav>
 <?php else: ?>

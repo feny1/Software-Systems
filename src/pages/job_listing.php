@@ -17,16 +17,16 @@ $jobs = fetchAllJobs();
 
   <script>
     function confirmApplication(jobId) {
-      
-        document.getElementById("popup-job-id").value = jobId;
 
-        document.getElementById("apply-popup").style.display = "flex";
+      document.getElementById("popup-job-id").value = jobId;
+
+      document.getElementById("apply-popup").style.display = "flex";
     }
 
     function closePopup() {
-        document.getElementById("apply-popup").style.display = "none";
+      document.getElementById("apply-popup").style.display = "none";
     }
-</script>
+  </script>
 
 
   <style>
@@ -39,21 +39,22 @@ $jobs = fetchAllJobs();
     .add-job-btn {
       display: inline-block;
       padding: 12px 24px;
-      background-color: #034C3C; 
+      background-color: #034C3C;
       color: white;
       text-decoration: none;
-      border-radius: 25px; 
+      border-radius: 25px;
       font-weight: bold;
       font-size: 16px;
       transition: background 0.3s ease-in-out;
     }
 
     .add-job-btn:hover {
-      background-color: #026C56; 
+      background-color: #026C56;
     }
+
     /* End of "add job button" */
 
-      .popup {
+    .popup {
       display: none;
       position: fixed;
       top: 0;
@@ -63,17 +64,17 @@ $jobs = fetchAllJobs();
       background: rgba(0, 0, 0, 0.5);
       justify-content: center;
       align-items: center;
-  }
+    }
 
-  .popup-content {
+    .popup-content {
       background: white;
       padding: 20px;
       border-radius: 8px;
       text-align: center;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  }
+    }
 
-  .confirm-btn {
+    .confirm-btn {
       background: #034C3C;
       color: white;
       padding: 10px 20px;
@@ -81,9 +82,9 @@ $jobs = fetchAllJobs();
       cursor: pointer;
       margin: 10px;
       border-radius: 5px;
-  }
+    }
 
-  .cancel-btn {
+    .cancel-btn {
       background: red;
       color: white;
       padding: 10px 20px;
@@ -91,20 +92,19 @@ $jobs = fetchAllJobs();
       cursor: pointer;
       margin: 10px;
       border-radius: 5px;
-  }
-
+    }
   </style>
 </head>
 
 <div id="apply-popup" class="popup">
-    <div class="popup-content">
-        <h2>هل أنت متأكد أنك تريد التقديم على هذه الوظيفة؟</h2>
-        <form id="apply-form" action="apply.php" method="POST">
-            <input type="hidden" name="job_id" id="popup-job-id">
-            <button type="submit" class="confirm-btn">تأكيد</button>
-            <button type="button" class="cancel-btn" onclick="closePopup()">رجوع</button>
-        </form>
-    </div>
+  <div class="popup-content">
+    <h2>هل أنت متأكد أنك تريد التقديم على هذه الوظيفة؟</h2>
+    <form id="apply-form" action="apply.php" method="POST">
+      <input type="hidden" name="job_id" id="popup-job-id">
+      <button type="submit" class="confirm-btn">تأكيد</button>
+      <button type="button" class="cancel-btn" onclick="closePopup()">رجوع</button>
+    </form>
+  </div>
 </div>
 
 
@@ -120,18 +120,18 @@ $jobs = fetchAllJobs();
           </a>
         </div>
         <div class="options">
-          <a href="#">
+          <a href="./logout.php">
             <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل">
           </a>
         </div>
       </header>
 
       <?php
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+      if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+      }
 
-        $user_type = ($_SESSION['user']['type'] == 1) ? 'company' : 'individual';
+      $user_type = ($_SESSION['user']['type'] == 1) ? 'company' : 'individual';
       ?>
 
       <main>
@@ -140,25 +140,25 @@ $jobs = fetchAllJobs();
         <div class="content">
 
 
-          
+
 
           <div class="filter-section">
             <h3>
               <img src="../images/cv.svg" alt="شعار تصفية">
               التصفية
             </h3>
-          
+
             <!-- A button for "adding a job" -->
-          <?php if (strtolower($user_type) === 'company'): ?>
+            <?php if (strtolower($user_type) === 'company'): ?>
               <div class="add-job-container">
-                  <a href="add_job.php" class="add-job-btn">إضافة وظيفة جديدة</a>
+                <a href="add_job.php" class="add-job-btn">إضافة وظيفة جديدة</a>
               </div>
-          <?php endif; ?>
-          
-          <div class="filter-choices">
+            <?php endif; ?>
+
+            <div class="filter-choices">
               <p>تطوع موسمي</p>
               <p>وظيفة موسمية</p>
-          </div>
+            </div>
 
             <form action="post">
               <label for="company-name">البحث عن اسم شركة: </label>
@@ -179,12 +179,12 @@ $jobs = fetchAllJobs();
                     <h3 class="company-title"><?php $job["company_id"] ?></h3>
                     <h3 class="salary"><?= $job["salary"] ?></h3>
                     <h3 class="job-type"><?php
-                    if($job["type"] == 0) {
-                      echo "وظيفة موسمية";
-                    } else {
-                      echo "تطوع موسمي";
-                    }
-                    ?></h3>
+                                          if ($job["type"] == 0) {
+                                            echo "وظيفة موسمية";
+                                          } else {
+                                            echo "تطوع موسمي";
+                                          }
+                                          ?></h3>
                   </div>
                   <p class="description"><?php echo $job["description"] ?> </p>
                 </div>
