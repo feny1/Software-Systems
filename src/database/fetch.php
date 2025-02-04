@@ -26,8 +26,6 @@ function getUserById($id)
     // Fetch the user data as an associative array
     $user = $result->fetchArray(SQLITE3_ASSOC);
 
-    $user['company_id'] = fetchUserCompany($user['id']);
-
     // Return the user data (or false/null if not found)
     return $user;
 }
@@ -38,6 +36,25 @@ function getCompanyByOwnerId($id)
 
     // Prepare the SQL statement with a parameter placeholder for the id
     $stmt = $db->prepare('SELECT * FROM companies WHERE owner_id = :id');
+
+    // Bind the id value to the placeholder. Use SQLITE3_INTEGER if id is an integer.
+    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+
+    // Execute the statement
+    $result = $stmt->execute();
+
+    // Fetch the user data as an associative array
+    $company = $result->fetchArray(SQLITE3_ASSOC);
+
+    // Return the user data (or false/null if not found)
+    return $company;
+}
+function getCompanyById($id)
+{
+    global $db;
+
+    // Prepare the SQL statement with a parameter placeholder for the id
+    $stmt = $db->prepare('SELECT * FROM company WHERE company_id = :id');
 
     // Bind the id value to the placeholder. Use SQLITE3_INTEGER if id is an integer.
     $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
@@ -65,6 +82,7 @@ function login($email, $password)
 
         $result = $stmt->execute();
         $user = $result->fetchArray(SQLITE3_ASSOC);
+        $_SESSION['user']['company_id'] = fetchUserCompany($user['id']);
 
         if ($user && custom_password_verify($password, $user['password'])) {
             return $user;
@@ -185,7 +203,27 @@ function fetchAllCompanies()
 function fetchAllJobs()
 {
     global $db;
-    $result = $db->query('SELECT * FROM jobs');
+    $result = $db->query('SELECT * FROM jobs ORDER BY 1 DESC');
+    $jobs = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $jobs[] = $row;
+    }
+    return $jobs;
+}
+function fetchAllJobsByType($type)
+{
+    global $db;
+    $result = $db->query("SELECT * FROM jobs where type = $type ORDER BY 1 DESC");
+    $jobs = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $jobs[] = $row;
+    }
+    return $jobs;
+}
+function fetchAllJobsAsCompany($id)
+{
+    global $db;
+    $result = $db->query("SELECT * FROM jobs where company_id = $id ");
     $jobs = [];
     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         $jobs[] = $row;
@@ -199,7 +237,7 @@ function fetchAllCompanyJobs($company_id)
     
     $company_id = intval($company_id);
 
-    $stmt = $db->prepare('SELECT name, description, salary FROM jobs WHERE company_id = :company_id');
+    $stmt = $db->prepare('SELECT * FROM jobs WHERE company_id = :company_id');
     $stmt->bindValue(':company_id', $company_id, SQLITE3_INTEGER);
     $result = $stmt->execute();
 

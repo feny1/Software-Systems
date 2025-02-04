@@ -68,7 +68,6 @@ $db->exec('CREATE TABLE IF NOT EXISTS company (
     FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (hr_id) REFERENCES users(id) ON DELETE CASCADE
 )');
-
 $db->exec('CREATE TABLE IF NOT EXISTS jobs (
     job_id INTEGER PRIMARY KEY, 
     company_id INTEGER,
@@ -77,9 +76,12 @@ $db->exec('CREATE TABLE IF NOT EXISTS jobs (
     salary INTEGER,
     language_id INTEGER,
     type BOOLEAN,
+    start DATE,
+    end DATE NULL,
     FOREIGN KEY (company_id) REFERENCES company(company_id) ON DELETE CASCADE,
     FOREIGN KEY (language_id) REFERENCES languages(language_id) ON DELETE CASCADE
 )');
+
 
 $db->exec('CREATE TABLE IF NOT EXISTS applications (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -101,3 +103,6 @@ $db->exec('CREATE TABLE IF NOT EXISTS employees (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE
 )');
+
+
+include('../database/sample.php');

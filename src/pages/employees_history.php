@@ -1,11 +1,8 @@
 <?php
 include('../components/page.php');
-?>
-
-<?php
+include('../database/data.php');
 
 try {
-
   if (isset($_GET['job_id'])) {
     $employeeData = fetchAllEmployeesByJobID($_GET['job_id']);
   } elseif (isset($_GET['company_id'])) {
@@ -24,7 +21,6 @@ try {
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,17 +37,9 @@ try {
       filterChoices.forEach((choice) => {
         choice.addEventListener("click", function() {
           filterChoices.forEach((choice) => choice.classList.remove("active"));
-
           this.classList.add("active");
-
           filterType = this.dataset.filter;
-
-          if (filterType === "name") {
-            searchInput.setAttribute("placeholder", "ابحث بالاسم");
-          } else if (filterType === "email") {
-            searchInput.setAttribute("placeholder", "ابحث بالإيميل");
-          }
-
+          searchInput.setAttribute("placeholder", filterType === "name" ? "ابحث بالاسم" : "ابحث بالإيميل");
           searchInput.value = "";
           employees.forEach((employee) => {
             employee.style.display = "table-row";
@@ -61,11 +49,9 @@ try {
 
       searchInput.addEventListener("input", function() {
         const search = searchInput.value.toLowerCase();
-
         employees.forEach((employee) => {
           const name = employee.querySelector(".employee-name").innerText.toLowerCase();
           const email = employee.querySelector(".employee-email").innerText.toLowerCase();
-
           if (
             (filterType === "name" && name.includes(search)) ||
             (filterType === "email" && email.includes(search))
@@ -79,7 +65,6 @@ try {
     });
   </script>
 </head>
-
 <body>
   <section class="page-structure">
     <?php include "../components/NavBar.php"; ?>
@@ -88,7 +73,7 @@ try {
         <div class="username">
           <a href="./profile.php">
             <img class="nav-icon" src="../images/profile.svg" alt="شعار المستخدم">
-            <h2><?php echo $user['name'] ?></h2>
+            <h2><?php echo $user['name']; ?></h2>
           </a>
         </div>
         <div class="options">
@@ -97,10 +82,8 @@ try {
           </a>
         </div>
       </header>
-
       <main>
         <h1 class="heading-title">الموظفين السابقين :</h1>
-
         <div class="content">
           <div class="filter-section">
             <h3>
@@ -111,12 +94,10 @@ try {
               <p data-filter="name" class="active">الاسم</p>
               <p data-filter="email">الإيميل</p>
             </div>
-
             <form>
               <label for="search">البحث :</label>
-              <input type="text" id="search" placeholder="<?php echo count($employee) === 0 ? "لا يوجد موظفين للبحث" : "ابحث بالاسم" ?>" disabled=<?php if (count($employee) === 0): ?> disabled <?php endif; ?>">
-              <
-                </form>
+              <input type="text" id="search" placeholder="<?php echo count($employee) === 0 ? 'لا يوجد موظفين للبحث' : 'ابحث بالاسم'; ?>" <?php if (count($employee) === 0) echo 'disabled'; ?>>
+            </form>
           </div>
           <?php if (count($employee)  === 0): ?>
             <h3 class="prev">لا يوجد موظفين سابقين</h3>
@@ -135,11 +116,11 @@ try {
               <tbody>
                 <?php foreach ($employee as $emp): ?>
                   <tr class="employee-row">
-                    <td class="employee-name"><?= $emp['user_name'] ?></td>
-                    <td class="employee-email"><?= $emp['email'] ?></td>
-                    <td><?= $emp['start'] ?></td>
-                    <td><?= $emp['end'] ?? 'لا زال على رأس العمل' ?></td>
-                    <td><?= $emp['name'] ?></td>
+                    <td class="employee-name"><?= htmlspecialchars($emp['user_name']); ?></td>
+                    <td class="employee-email"><?= htmlspecialchars($emp['email']); ?></td>
+                    <td><?= htmlspecialchars($emp['start']); ?></td>
+                    <td><?= isset($emp['end']) && $emp['end'] ? htmlspecialchars($emp['end']) : 'لا زال على رأس العمل'; ?></td>
+                    <td><?= htmlspecialchars($emp['job_title'] ?? $emp['name']); ?></td>
                     <td class="actions">
                       <button class="details">إظهار التفاصيل</button>
                       <button class="delete">حذف</button>
@@ -154,5 +135,4 @@ try {
     </section>
   </section>
 </body>
-
 </html>

@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newUserId = signup($username, $email, $password, null, $type);
     if ($newUserId) {
       $_SESSION['user'] = getUserById($newUserId);
+      
+      $_SESSION['user']['company_id'] = fetchUserCompany($_SESSION['user']['id']);
 
       // If the user signed up as a company (type 1), create a new company record
       if ($type == '1') {
@@ -158,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       let usernameError = document.getElementById("username-error");
 
       // Regular expression for a valid email format
-      let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$/;
 
       let isValid = true; // Track validation state
 

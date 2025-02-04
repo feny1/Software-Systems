@@ -28,6 +28,7 @@ if ($existing) {
 $stmt = $db->prepare("INSERT INTO applications (job_id, user_id, status) VALUES (:job_id, :user_id, :status)");
 $stmt->bindValue(':job_id', $job_id, SQLITE3_INTEGER);
 $stmt->bindValue(':user_id', $user_id, SQLITE3_INTEGER);
+$stmt->bindValue(':status', 'pending', SQLITE3_TEXT);
 $stmt->execute();
 
 // ✅ Redirect user back to job listings with success message

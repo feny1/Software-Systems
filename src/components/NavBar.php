@@ -5,6 +5,7 @@ $navList = $navList ?? [];
 $companyID = null;
 if ($user) {
   $companyID = fetchUserCompany($user["id"]);
+  $_SESSION["user"]["company_id"] = $companyID;
 }
 
 
@@ -29,7 +30,7 @@ if (isset($user) && isset($user["type"])) {
       "title" => "الشركة",
       "icon" => "company.svg",
       "alt" => "شعار الشركات",
-      "link" => "./company.php?id=" . $companyID["company_id"]
+      "link" => "./company.php"
     ]);
   }
 }
