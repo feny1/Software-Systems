@@ -1,39 +1,38 @@
 <?php
 $user = $_SESSION["user"] ?? null;
-$navList = $navList ?? [
+$navList = $navList ?? [];
 
-];
+$current_page = basename($_SERVER['PHP_SELF']);
 
-// if user is employee or company owner
 if (isset($user) && isset($user["type"])) {
-  array_push(
-    $navList,
-    [
-      "title" => "الملف",
-      "icon" => "cv.svg",
-      "alt" => "شعار السيرة الذاتية",
-      "link" => "./profile.php"
-    ]
-  );
-  if ($user["type"] == 0) {
-    array_push($navList, [
-      "title" => "الوظائف",
-      "icon" => "jobs.svg",
-      "alt" => "شعار الوظائف",
-      "link" => "./job_listing.php"
-    ]);
-  } else {
-    array_push($navList, [
-      "title" => "الشركة",
-      "icon" => "company.svg",
-      "alt" => "شعار الشركات",
-      "link" => "./company.php"
-    ]);
-  }
+    array_push(
+        $navList,
+        [
+            "title" => "الملف",
+            "icon" => "cv.svg",
+            "alt" => "شعار السيرة الذاتية",
+            "link" => "./profile.php"
+        ]
+    );
+    if ($user["type"] == 0) {
+        array_push($navList, [
+            "title" => "الوظائف",
+            "icon" => "jobs.svg",
+            "alt" => "شعار الوظائف",
+            "link" => "./job_listing.php"
+        ]);
+    } else {
+        array_push($navList, [
+            "title" => "الشركة",
+            "icon" => "company.svg",
+            "alt" => "شعار الشركات",
+            "link" => "./company.php"
+        ]);
+    }
 }
 
 if (isset($customNavList)) {
-  $navList = array_merge($navList, $customNavList);
+    $navList = array_merge($navList, $customNavList);
 }
 ?>
 
@@ -53,6 +52,13 @@ if (isset($customNavList)) {
         </li>
       <?php endforeach; ?>
     </ul>
+
+    <?php if ($current_page !== "job_listing.php"): ?>  
+        <div class="view-jobs-container">
+            <a href="./job_listing.php" class="view-jobs-btn">عرض الوظائف</a>
+        </div>
+    <?php endif; ?>
+
   </nav>
 <?php else: ?>
   <nav class="main-navigation">
