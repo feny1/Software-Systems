@@ -61,6 +61,9 @@ $db->exec('CREATE TABLE IF NOT EXISTS company (
     hr_id INTEGER,
     name TEXT,
     location TEXT,
+    email TEXT,
+    linkedin Text,
+    phone TEXT,
     bio TEXT,
     FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (hr_id) REFERENCES users(id) ON DELETE CASCADE
