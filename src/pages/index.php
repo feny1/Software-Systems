@@ -100,7 +100,7 @@ include('../components/page.php');
     }
 
 
-    .register-company {
+    .login {
       background-color: #034C3C;
       color: #ffffff;
       padding: 10px 30px;
@@ -111,12 +111,12 @@ include('../components/page.php');
       font-size: 24px;
     }
 
-    .register-company:hover {
+    .login:hover {
       background-color: #02632A;
       transform: translateY(-3px);
     }
 
-    .login {
+    .register {
       background-color: #2B3344;
       color: var(--white-color);
       padding: 10px 30px;
@@ -127,7 +127,7 @@ include('../components/page.php');
       font-size: 24px;
     }
 
-    .login:hover {
+    .register:hover {
       background-color: #1D222D;
       transform: translateY(-3px);
     }
@@ -169,7 +169,6 @@ include('../components/page.php');
 
   <div class="header">
     <h1>موسمي</h1>
-    <a href="../pages/login.php" class="register-individual">تسجيل الدخول</a>
   </div>
 
   <div class="hero">
@@ -178,6 +177,7 @@ include('../components/page.php');
 
     <div class="links">
       <a href="../pages/signup.php" class="login">تسجيل جديد</a>
+      <a href="../pages/login.php" class="register">تسجيل الدخول</a>
     </div>
   </div>
 
