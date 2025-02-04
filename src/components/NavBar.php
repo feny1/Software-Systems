@@ -5,6 +5,7 @@ $navList = $navList ?? [];
 $companyID = null;
 if ($user) {
   $companyID = fetchUserCompany($user["id"]);
+  if(isset($companyID["company_id"]))
   $_SESSION["user"]["company_id"] = $companyID["company_id"];
 }
 

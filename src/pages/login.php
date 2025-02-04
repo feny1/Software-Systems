@@ -255,7 +255,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="action-buttons">
                 <button type="submit" class="login-btn">تسجيل الدخول</button>
                 <button type="button" class="signup-btn" onclick="window.location.href='signup.php'">تسجيل جديد</button>
-                <button type="button" class="back-btn" onclick="window.history.back()">العودة للخلف</button>
             </div>
         </div>
     </form>
