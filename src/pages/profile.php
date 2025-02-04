@@ -195,6 +195,25 @@ $responses = fetchResponseByUserID($user_id);
         .exp-edit-row {
             background-color: #fafafa;
         }
+
+        .block .applications {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        tbody tr:first-of-type {
+            background-color: var(--main-color);
+            color: var(--white-color);
+            border: 0;
+        }
+
+        tbody tr:first-of-type th {
+            padding: .5rem;
+            text-align: center;
+            color: var(--white-color)
+        }
     </style>
 </head>
 
@@ -309,41 +328,41 @@ $responses = fetchResponseByUserID($user_id);
 
                 <section class="recent-activity">
 
-                <div class="block applications">
-    <h2>طلبات الوظائف المقدمة</h2>
-    <table border="1" cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
-        <tr>
-            <th>المسمى الوظيفي</th>
-            <th>الشركة</th>
-            <th>تاريخ التقديم</th>
-            <th>الحالة</th>
-        </tr>
-        <?php if (!empty($responses)): ?>
-            <?php foreach ($responses as $response): ?>
-                <tr>
-                    <td><?= htmlspecialchars($response["job_title"]) ?></td>
-                    <td><?= htmlspecialchars($response["company_name"]) ?></td>
-                    <td><?= htmlspecialchars($response["applied_at"]) ?></td>
-                    <td class="<?= $response["status"] === "accepted" ? "accepted" : ($response["status"] === "rejected" ? "rejected" : "pending") ?>">
-                        <?php 
-                            if ($response["status"] === "accepted") {
-                                echo "✔ مقبول";
-                            } elseif ($response["status"] === "rejected") {
-                                echo "✖ مرفوض";
-                            } else {
-                                echo "⏳ قيد المراجعة";
-                            }
-                        ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="4" style="text-align: center;">لم يتم التقديم على أي وظيفة بعد</td>
-            </tr>
-        <?php endif; ?>
-    </table>
-</div>
+                    <div class="block applications">
+                        <h2>طلبات الوظائف المقدمة</h2>
+                        <table cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
+                            <tr>
+                                <th>المسمى الوظيفي</th>
+                                <th>الشركة</th>
+                                <th>تاريخ التقديم</th>
+                                <th>الحالة</th>
+                            </tr>
+                            <?php if (!empty($responses)): ?>
+                                <?php foreach ($responses as $response): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($response["job_title"]) ?></td>
+                                        <td><?= htmlspecialchars($response["company_name"]) ?></td>
+                                        <td><?= htmlspecialchars($response["applied_at"]) ?></td>
+                                        <td class="<?= $response["status"] === "accepted" ? "accepted" : ($response["status"] === "rejected" ? "rejected" : "pending") ?>">
+                                            <?php
+                                            if ($response["status"] === "accepted") {
+                                                echo "✔ مقبول";
+                                            } elseif ($response["status"] === "rejected") {
+                                                echo "✖ مرفوض";
+                                            } else {
+                                                echo "⏳ قيد المراجعة";
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">لم يتم التقديم على أي وظيفة بعد</td>
+                                </tr>
+                            <?php endif; ?>
+                        </table>
+                    </div>
 
 
                     <!-- History Section (السجل) - Display Only -->
