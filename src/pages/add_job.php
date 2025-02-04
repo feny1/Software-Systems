@@ -1,5 +1,5 @@
 <?php
-include ('../components/page.php');
+include('../components/page.php');
 ?>
 <?php
 
@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
 
-        <button type="submit">Add</button>
+        <button type="submit">أضف الوظيفة</button>
     </form>
 
     </div>

@@ -16,7 +16,7 @@ if (isset($user) && isset($user["type"])) {
       "icon" => "cv.svg",
       "alt" => "شعار السيرة الذاتية",
       "link" => "./profile.php"
-    ]
+    ],
   );
   if ($user["type"] == 0) {
     array_push($navList, [
