@@ -196,8 +196,8 @@ function fetchAllApplicationsForCompany($company_id)
     global $db;
     
     $stmt = $db->prepare("
-        SELECT applications.id, applications.applied_at, users.name AS applicant_name, 
-               jobs.name AS job_title, jobs.salary
+        SELECT applications.id, applications.applied_at, applications.status, 
+               users.name AS applicant_name, jobs.name AS job_title, jobs.salary
         FROM applications
         JOIN jobs ON applications.job_id = jobs.job_id
         JOIN users ON applications.user_id = users.id
@@ -215,6 +215,32 @@ function fetchAllApplicationsForCompany($company_id)
 
     return $applications;
 }
+
+function fetchResponseByUserID($user_id)
+{
+    global $db;
+
+    $stmt = $db->prepare("
+        SELECT applications.id, applications.status, applications.applied_at, 
+               jobs.name AS job_title, company.name AS company_name
+        FROM applications
+        JOIN jobs ON applications.job_id = jobs.job_id
+        JOIN company ON jobs.company_id = company.company_id
+        WHERE applications.user_id = :user_id
+        ORDER BY applications.applied_at DESC
+    ");
+
+    $stmt->bindValue(':user_id', $user_id, SQLITE3_INTEGER);
+    $result = $stmt->execute();
+
+    $responses = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $responses[] = $row;
+    }
+
+    return $responses;
+}
+
 
 
 function fetchAllEmployees()

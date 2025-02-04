@@ -150,6 +150,13 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
     $certificates[] = $row;
 }
 ?>
+
+<?php
+$user_id = $_SESSION['user']['id'];
+$responses = fetchResponseByUserID($user_id);
+?>
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -301,6 +308,44 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                 </section>
 
                 <section class="recent-activity">
+
+                <div class="block applications">
+    <h2>طلبات الوظائف المقدمة</h2>
+    <table border="1" cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
+        <tr>
+            <th>المسمى الوظيفي</th>
+            <th>الشركة</th>
+            <th>تاريخ التقديم</th>
+            <th>الحالة</th>
+        </tr>
+        <?php if (!empty($responses)): ?>
+            <?php foreach ($responses as $response): ?>
+                <tr>
+                    <td><?= htmlspecialchars($response["job_title"]) ?></td>
+                    <td><?= htmlspecialchars($response["company_name"]) ?></td>
+                    <td><?= htmlspecialchars($response["applied_at"]) ?></td>
+                    <td class="<?= $response["status"] === "accepted" ? "accepted" : ($response["status"] === "rejected" ? "rejected" : "pending") ?>">
+                        <?php 
+                            if ($response["status"] === "accepted") {
+                                echo "✔ مقبول";
+                            } elseif ($response["status"] === "rejected") {
+                                echo "✖ مرفوض";
+                            } else {
+                                echo "⏳ قيد المراجعة";
+                            }
+                        ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="4" style="text-align: center;">لم يتم التقديم على أي وظيفة بعد</td>
+            </tr>
+        <?php endif; ?>
+    </table>
+</div>
+
+
                     <!-- History Section (السجل) - Display Only -->
                     <div class="block history">
                         <h2>السجل</h2>
