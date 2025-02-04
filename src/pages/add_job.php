@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
   <section class="page-structure">
     <?php include "../components/NavBar.php" ?>
-    <form action="" method="POST">
+    <form action="" method="POST" id="add_job_form">
       <h2>إضافة وظيفة</h2>
       <div class="content">
         <div class="field">
@@ -101,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="field">
           <label for="salary">الراتب</label>
           <input type="text" name="salary" id="salary" required>
+<<<<<<< HEAD
         </div>
         <!-- New fields for start and end date -->
         <div class="field">
@@ -117,6 +118,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <option value="العربية">العربية</option>
             <option value="English">English</option>
           </select>
+=======
+>>>>>>> 23910ce9aa041fe6568df017301e01aeb4c6e335
         </div>
         <div class="field">
           <label for="job_type">نوع الوظيفة</label>
@@ -136,5 +139,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </form>
   </section>
+
+  <script>
+    const salaryInput = document.getElementById('salary');
+    const form = document.getElementById('add_job_form');
+
+    form.addEventListener('submit', function(event) {
+
+      event.preventDefault();
+
+      const salary = parseFloat(salaryInput.value);
+
+      if (isNaN(salary)) {
+        alert('الرجاء إدخال رقم صحيح للراتب');
+        return;
+      }
+
+      if (salary < 0) {
+        alert('المبلغ يجب أن يكون موجباً أو أكبر من الصفر');
+        return;
+      }
+
+      // If validation passes, submit the form
+      form.submit();
+    });
+  </script>
 </body>
 </html>
