@@ -1,9 +1,10 @@
 <?php
-include ('../components/page.php');
-?>
-<?php
+include('../components/page.php');
+
+$user = $_SESSION["user"];
 $jobs = fetchAllJobs();
 ?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -23,7 +24,7 @@ $jobs = fetchAllJobs();
         <div class="username">
           <a href="./profile.php">
             <img class="nav-icon" src="../images/profile.svg" alt="شعار المستخدم">
-            <h2>اسم المستخدم</h2>
+            <h2><?php echo $user["name"] ?></h2>
           </a>
         </div>
         <div class="options">
@@ -53,6 +54,9 @@ $jobs = fetchAllJobs();
             </form>
           </div>
           <div class="jobs-section">
+            <?php if (count($jobs) === 0): ?>
+              <h3 class="no-jobs">لا يوجد وظائف</h3>
+            <?php endif; ?>
             <?php foreach ($jobs as $job): ?>
               <div class="job">
                 <img src="../images/sampleJob.png" alt="job image">

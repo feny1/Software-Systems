@@ -300,4 +300,10 @@ main form input {
   }
 }
 
+.no-jobs {
+  display: grid;
+  width: 100%;
+  place-items: center;
+}
+
 /* End jobs */

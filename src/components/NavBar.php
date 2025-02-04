@@ -1,8 +1,9 @@
 <?php
 $user = $_SESSION["user"] ?? null;
-$navList = $navList ?? [
+$navList = $navList ?? [];
 
-];
+$companyID = fetchUserCompany($user["id"]);
+
 
 // if user is employee or company owner
 if (isset($user) && isset($user["type"])) {
@@ -27,7 +28,7 @@ if (isset($user) && isset($user["type"])) {
       "title" => "الشركة",
       "icon" => "company.svg",
       "alt" => "شعار الشركات",
-      "link" => "./company.php"
+      "link" => "./company.php?id=" . $companyID["company_id"]
     ]);
   }
 }

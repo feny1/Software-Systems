@@ -152,331 +152,340 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles/profile.css">
-  <title>الملف الشخصي</title>
-  <style>
-    /* Optional inline styles for the edit forms */
-    .edit-form, .cert-edit-form {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 10px;
-      background-color: #fefefe;
-    }
-    .edit-btn, .cancel-btn, .delete-btn {
-      cursor: pointer;
-      text-decoration: underline;
-      margin-left: 5px;
-    }
-    .edit-btn { color: blue; }
-    .delete-btn { color: red; }
-    /* Experience inline edit row styling */
-    .exp-edit-row { background-color: #fafafa; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/profile.css">
+    <title>الملف الشخصي</title>
+    <style>
+        /* Optional inline styles for the edit forms */
+        .edit-form,
+        .cert-edit-form {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #fefefe;
+        }
+
+        .edit-btn,
+        .cancel-btn,
+        .delete-btn {
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+
+        .edit-btn {
+            color: blue;
+        }
+
+        .delete-btn {
+            color: red;
+        }
+
+        /* Experience inline edit row styling */
+        .exp-edit-row {
+            background-color: #fafafa;
+        }
+    </style>
 </head>
+
 <body>
-  <section class="page-structure">
-    <?php include "../components/NavBar.php"; ?>
-    <section class="page-content">
-      <div class="username">
-        <img class="profile-pic" src="../images/profile.svg" alt="صورة المستخدم">
-        <div class="user">
-          <h2><?= htmlspecialchars($user['name']) ?></h2>
-          <?php if ($isOwner): ?>
-            <span class="edit-btn" onclick="toggleEdit('profile')">[تعديل الملف الشخصي]</span>
-          <?php endif; ?>
-        </div>
-      </div>
-      <div class="options">
-        <a href="./logout.php">
-          <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل الخروج">
-        </a>
-      </div>
-      <header></header>
-
-      <main>
-        <section class="profile-details">
-          <!-- About Section -->
-          <div class="block about">
-            <h2>نبذة</h2>
-            <div id="aboutDisplay">
-              <p><?= htmlspecialchars($about) ?></p>
-              <?php if ($isOwner): ?>
-                <span class="edit-btn" onclick="toggleEdit('about')">[تعديل]</span>
-              <?php endif; ?>
+    <section class="page-structure">
+        <?php include "../components/NavBar.php"; ?>
+        <section class="page-content">
+            <div class="username">
+                <img class="profile-pic" src="../images/profile.svg" alt="صورة المستخدم">
+                <div class="user">
+                    <h2><?= htmlspecialchars($user['name']) ?></h2>
+                    <?php if ($isOwner): ?>
+                        <span class="edit-btn" onclick="toggleEdit('profile')">[تعديل الملف الشخصي]</span>
+                    <?php endif; ?>
+                </div>
             </div>
-<<<<<<< HEAD
-            <?php if ($isOwner): ?>
-              <div id="aboutEdit" class="edit-form" style="display: none;">
-                <form method="POST" action="">
-                  <textarea name="bio" rows="4"><?= htmlspecialchars($about) ?></textarea>
-                  <input type="hidden" name="update_about" value="1">
-                  <br>
-                  <button type="submit">حفظ</button>
-                  <button type="button" onclick="toggleEdit('about')">إلغاء</button>
-                </form>
-              </div>
-            <?php endif; ?>
-          </div>
-
-          <!-- Skills Section -->
-          <div class="block skills">
-            <h2>المهارات</h2>
-            <div id="skillsDisplay">
-              <ul>
-                <?php foreach ($skills as $skill): ?>
-                  <li><?= htmlspecialchars($skill) ?></li>
-                <?php endforeach; ?>
-              </ul>
-              <?php if ($isOwner): ?>
-                <span class="edit-btn" onclick="toggleEdit('skills')">[تعديل المهارات]</span>
-              <?php endif; ?>
-=======
             <div class="options">
-                <a href="#">
+                <a href="./logout.php">
                     <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل الخروج">
                 </a>
->>>>>>> 5e525f54c160c8dff4e8a0757d7864804c393a0a
             </div>
-            <?php if ($isOwner): ?>
-              <div id="skillsEdit" class="edit-form" style="display: none;">
-                <form method="POST" action="">
-                  <textarea name="skills" rows="4" placeholder="اكتب كل مهارة في سطر منفصل"><?php echo implode("\n", $skills); ?></textarea>
-                  <input type="hidden" name="update_skills" value="1">
-                  <br>
-                  <button type="submit">حفظ</button>
-                  <button type="button" onclick="toggleEdit('skills')">إلغاء</button>
-                </form>
-              </div>
-            <?php endif; ?>
-          </div>
+            <header></header>
 
-          <!-- Contacts Section -->
-          <div class="block contacts">
-            <h2>معلومات الاتصال</h2>
-            <div id="contactDisplay">
-              <ul>
-                <li>البريد الإلكتروني:
-                  <a href="mailto:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a>
-                </li>
-                <li>رقم الهاتف:
-                  <a href="tel:<?= htmlspecialchars($phone) ?>"><?= htmlspecialchars($phone) ?></a>
-                </li>
-                <li>لينكد إن:
-                  <a href="<?= htmlspecialchars($linkedin) ?>"><?= htmlspecialchars($linkedin) ?></a>
-                </li>
-              </ul>
-              <?php if ($isOwner): ?>
-                <span class="edit-btn" onclick="toggleEdit('contact')">[تعديل]</span>
-              <?php endif; ?>
-            </div>
-            <?php if ($isOwner): ?>
-              <div id="contactEdit" class="edit-form" style="display: none;">
-                <form method="POST" action="">
-                  <label>رقم الهاتف:
-                    <input type="text" name="phone" value="<?= htmlspecialchars($phone) ?>">
-                  </label>
-                  <br>
-                  <label>لينكد إن:
-                    <input type="text" name="linkedin" value="<?= htmlspecialchars($linkedin) ?>">
-                  </label>
-                  <br>
-                  <input type="hidden" name="update_contact" value="1">
-                  <button type="submit">حفظ</button>
-                  <button type="button" onclick="toggleEdit('contact')">إلغاء</button>
-                </form>
-              </div>
-            <?php endif; ?>
-          </div>
+            <main>
+                <section class="profile-details">
+                    <!-- About Section -->
+                    <div class="block about">
+                        <h2>نبذة</h2>
+                        <div id="aboutDisplay">
+                            <p><?= htmlspecialchars($about) ?></p>
+                            <?php if ($isOwner): ?>
+                                <span class="edit-btn" onclick="toggleEdit('about')">[تعديل]</span>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($isOwner): ?>
+                            <div id="aboutEdit" class="edit-form" style="display: none;">
+                                <form method="POST" action="">
+                                    <textarea name="bio" rows="4"><?= htmlspecialchars($about) ?></textarea>
+                                    <input type="hidden" name="update_about" value="1">
+                                    <br>
+                                    <button type="submit">حفظ</button>
+                                    <button type="button" onclick="toggleEdit('about')">إلغاء</button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Skills Section -->
+                    <div class="block skills">
+                        <h2>المهارات</h2>
+                        <div id="skillsDisplay">
+                            <ul>
+                                <?php foreach ($skills as $skill): ?>
+                                    <li><?= htmlspecialchars($skill) ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <?php if ($isOwner): ?>
+                                <span class="edit-btn" onclick="toggleEdit('skills')">[تعديل المهارات]</span>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($isOwner): ?>
+                            <div id="skillsEdit" class="edit-form" style="display: none;">
+                                <form method="POST" action="">
+                                    <textarea name="skills" rows="4" placeholder="اكتب كل مهارة في سطر منفصل"><?php echo implode("\n", $skills); ?></textarea>
+                                    <input type="hidden" name="update_skills" value="1">
+                                    <br>
+                                    <button type="submit">حفظ</button>
+                                    <button type="button" onclick="toggleEdit('skills')">إلغاء</button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Contacts Section -->
+                    <div class="block contacts">
+                        <h2>معلومات الاتصال</h2>
+                        <div id="contactDisplay">
+                            <ul>
+                                <li>البريد الإلكتروني:
+                                    <a href="mailto:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a>
+                                </li>
+                                <li>رقم الهاتف:
+                                    <a href="tel:<?= htmlspecialchars($phone) ?>"><?= htmlspecialchars($phone) ?></a>
+                                </li>
+                                <li>لينكد إن:
+                                    <a href="<?= htmlspecialchars($linkedin) ?>"><?= htmlspecialchars($linkedin) ?></a>
+                                </li>
+                            </ul>
+                            <?php if ($isOwner): ?>
+                                <span class="edit-btn" onclick="toggleEdit('contact')">[تعديل]</span>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($isOwner): ?>
+                            <div id="contactEdit" class="edit-form" style="display: none;">
+                                <form method="POST" action="">
+                                    <label>رقم الهاتف:
+                                        <input type="text" name="phone" value="<?= htmlspecialchars($phone) ?>">
+                                    </label>
+                                    <br>
+                                    <label>لينكد إن:
+                                        <input type="text" name="linkedin" value="<?= htmlspecialchars($linkedin) ?>">
+                                    </label>
+                                    <br>
+                                    <input type="hidden" name="update_contact" value="1">
+                                    <button type="submit">حفظ</button>
+                                    <button type="button" onclick="toggleEdit('contact')">إلغاء</button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </section>
+
+                <section class="recent-activity">
+                    <!-- History Section (السجل) - Display Only -->
+                    <div class="block history">
+                        <h2>السجل</h2>
+                        <ul>
+                            <?php foreach ($prevJobs as $job): ?>
+                                <li>
+                                    <span class="company">
+                                        <?php if (!empty($job['company_id'])): ?>
+                                            <a href="./company.php?id=<?= htmlspecialchars($job['company_id']) ?>">
+                                                <?= htmlspecialchars($job['company']) ?>
+                                            </a>
+                                        <?php else: ?>
+                                            <?= htmlspecialchars($job['company']) ?>
+                                        <?php endif; ?>
+                                    </span>
+                                    <?= htmlspecialchars($job['duration']) ?>
+                                    <!-- No edit/delete options for السجل -->
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+
+                    <!-- Experiences Section with inline editing for each experience -->
+                    <div class="block experinces">
+                        <h2>الخبرات</h2>
+                        <table border="1" cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
+                            <tr>
+                                <th>المسمى الوظيفي</th>
+                                <th>الشركة</th>
+                                <th>المدة</th>
+                                <?php if ($isOwner): ?>
+                                    <th>الإجراءات</th>
+                                <?php endif; ?>
+                            </tr>
+                            <?php foreach ($jobs as $job): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($job['name']) ?></td>
+                                    <td><?= htmlspecialchars($job['company']) ?></td>
+                                    <td><?= htmlspecialchars($job['years']) ?> سنة</td>
+                                    <?php if ($isOwner): ?>
+                                        <td>
+                                            <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">تعديل</button>
+                                            <form method="POST" action="" class="delete-form" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف الخبرة؟');">
+                                                <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
+                                                <input type="hidden" name="delete_experience" value="1">
+                                                <button type="submit" class="delete-btn">حذف</button>
+                                            </form>
+                                        </td>
+                                    <?php endif; ?>
+                                </tr>
+                                <?php if ($isOwner): ?>
+                                    <!-- Inline Experience Edit Row (hidden by default) -->
+                                    <tr id="expEdit-<?= $job['experience_id'] ?>" class="exp-edit-row" style="display:none;">
+                                        <td colspan="4">
+                                            <form method="POST" action="">
+                                                <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
+                                                <label>المسمى الوظيفي:</label>
+                                                <input type="text" name="exp_name" value="<?= htmlspecialchars($job['name']) ?>" required>
+                                                <label>الشركة:</label>
+                                                <input type="text" name="exp_company" value="<?= htmlspecialchars($job['company']) ?>">
+                                                <label>عدد السنوات:</label>
+                                                <input type="number" name="exp_years" value="<?= htmlspecialchars($job['years']) ?>" min="0" required>
+                                                <input type="hidden" name="update_experience" value="1">
+                                                <button type="submit">حفظ</button>
+                                                <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">إلغاء</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+
+                    <!-- Certificates / Courses Section with inline add, edit, and delete forms -->
+                    <div class="block courses">
+                        <h2>الدورات والشهادات</h2>
+                        <ul id="certificatesList">
+                            <?php if (count($certificates) === 0): ?>
+                                <li>لا توجد بيانات</li>
+                            <?php else: ?>
+                                <?php foreach ($certificates as $cert): ?>
+                                    <li id="cert-<?= $cert['certificate_id'] ?>">
+                                        <strong><?= htmlspecialchars($cert['name']) ?></strong>
+                                        <?php if (!empty($cert['description'])): ?>
+                                            - <?= htmlspecialchars($cert['description']) ?>
+                                        <?php endif; ?>
+                                        <?php if (!empty($cert['company'])): ?>
+                                            (<?= htmlspecialchars($cert['company']) ?>)
+                                        <?php endif; ?>
+                                        <?php if ($isOwner): ?>
+                                            <span class="edit-btn" onclick="toggleEdit('cert-<?= $cert['certificate_id'] ?>')">[تعديل]</span>
+                                            <div id="certEdit-<?= $cert['certificate_id'] ?>" class="cert-edit-form" style="display: none;">
+                                                <form method="POST" action="">
+                                                    <input type="hidden" name="cert_id" value="<?= $cert['certificate_id'] ?>">
+                                                    <label>اسم الشهادة / الدورة:</label>
+                                                    <input type="text" name="cert_name" value="<?= htmlspecialchars($cert['name']) ?>" required>
+                                                    <br>
+                                                    <label>الوصف:</label>
+                                                    <textarea name="cert_desc" rows="3"><?= htmlspecialchars($cert['description']) ?></textarea>
+                                                    <br>
+                                                    <label>الشركة (إن وجدت):</label>
+                                                    <input type="text" name="cert_company" value="<?= htmlspecialchars($cert['company']) ?>">
+                                                    <br>
+                                                    <input type="hidden" name="update_certificate" value="1">
+                                                    <button type="submit">حفظ</button>
+                                                    <button type="button" onclick="toggleEdit('cert-<?= $cert['certificate_id'] ?>')">إلغاء</button>
+                                                </form>
+                                            </div>
+                                            <form method="POST" action="" class="delete-form" onsubmit="return confirm('هل أنت متأكد من حذف الشهادة؟');">
+                                                <input type="hidden" name="cert_id" value="<?= $cert['certificate_id'] ?>">
+                                                <input type="hidden" name="delete_certificate" value="1">
+                                                <button type="submit" class="delete-btn">[حذف]</button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </ul>
+                        <?php if ($isOwner): ?>
+                            <span class="edit-btn" onclick="toggleEdit('new_certificate')">[إضافة شهادة/دورة جديدة]</span>
+                            <div id="certEdit-new_certificate" class="edit-form" style="display: none;">
+                                <form method="POST" action="">
+                                    <label>اسم الشهادة / الدورة:</label>
+                                    <input type="text" name="cert_name" required>
+                                    <br>
+                                    <label>الوصف:</label>
+                                    <textarea name="cert_desc" rows="3"></textarea>
+                                    <br>
+                                    <label>الشركة (إن وجدت):</label>
+                                    <input type="text" name="cert_company">
+                                    <br>
+                                    <input type="hidden" name="add_certificate" value="1">
+                                    <button type="submit">حفظ</button>
+                                    <button type="button" onclick="toggleEdit('new_certificate')">إلغاء</button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </section>
+            </main>
         </section>
-
-        <section class="recent-activity">
-          <!-- History Section (السجل) - Display Only -->
-          <div class="block history">
-            <h2>السجل</h2>
-            <ul>
-              <?php foreach ($prevJobs as $job): ?>
-                <li>
-                  <span class="company">
-                    <?php if (!empty($job['company_id'])): ?>
-                      <a href="./company.php?id=<?= htmlspecialchars($job['company_id']) ?>">
-                        <?= htmlspecialchars($job['company']) ?>
-                      </a>
-                    <?php else: ?>
-                      <?= htmlspecialchars($job['company']) ?>
-                    <?php endif; ?>
-                  </span>
-                  <?= htmlspecialchars($job['duration']) ?>
-                  <!-- No edit/delete options for السجل -->
-                </li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-
-          <!-- Experiences Section with inline editing for each experience -->
-          <div class="block experinces">
-            <h2>الخبرات</h2>
-            <table border="1" cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
-              <tr>
-                <th>المسمى الوظيفي</th>
-                <th>الشركة</th>
-                <th>المدة</th>
-                <?php if ($isOwner): ?>
-                  <th>الإجراءات</th>
-                <?php endif; ?>
-              </tr>
-              <?php foreach ($jobs as $job): ?>
-                <tr>
-                  <td><?= htmlspecialchars($job['name']) ?></td>
-                  <td><?= htmlspecialchars($job['company']) ?></td>
-                  <td><?= htmlspecialchars($job['years']) ?> سنة</td>
-                  <?php if ($isOwner): ?>
-                    <td>
-                      <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">تعديل</button>
-                      <form method="POST" action="" class="delete-form" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف الخبرة؟');">
-                        <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
-                        <input type="hidden" name="delete_experience" value="1">
-                        <button type="submit" class="delete-btn">حذف</button>
-                      </form>
-                    </td>
-                  <?php endif; ?>
-                </tr>
-                <?php if ($isOwner): ?>
-                <!-- Inline Experience Edit Row (hidden by default) -->
-                <tr id="expEdit-<?= $job['experience_id'] ?>" class="exp-edit-row" style="display:none;">
-                  <td colspan="4">
-                    <form method="POST" action="">
-                      <input type="hidden" name="exp_id" value="<?= $job['experience_id'] ?>">
-                      <label>المسمى الوظيفي:</label>
-                      <input type="text" name="exp_name" value="<?= htmlspecialchars($job['name']) ?>" required>
-                      <label>الشركة:</label>
-                      <input type="text" name="exp_company" value="<?= htmlspecialchars($job['company']) ?>">
-                      <label>عدد السنوات:</label>
-                      <input type="number" name="exp_years" value="<?= htmlspecialchars($job['years']) ?>" min="0" required>
-                      <input type="hidden" name="update_experience" value="1">
-                      <button type="submit">حفظ</button>
-                      <button type="button" onclick="toggleExpEdit(<?= $job['experience_id'] ?>)">إلغاء</button>
-                    </form>
-                  </td>
-                </tr>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            </table>
-          </div>
-
-          <!-- Certificates / Courses Section with inline add, edit, and delete forms -->
-          <div class="block courses">
-            <h2>الدورات والشهادات</h2>
-            <ul id="certificatesList">
-              <?php if (count($certificates) === 0): ?>
-                <li>لا توجد بيانات</li>
-              <?php else: ?>
-                <?php foreach ($certificates as $cert): ?>
-                  <li id="cert-<?= $cert['certificate_id'] ?>">
-                    <strong><?= htmlspecialchars($cert['name']) ?></strong>
-                    <?php if (!empty($cert['description'])): ?>
-                      - <?= htmlspecialchars($cert['description']) ?>
-                    <?php endif; ?>
-                    <?php if (!empty($cert['company'])): ?>
-                      (<?= htmlspecialchars($cert['company']) ?>)
-                    <?php endif; ?>
-                    <?php if ($isOwner): ?>
-                      <span class="edit-btn" onclick="toggleEdit('cert-<?= $cert['certificate_id'] ?>')">[تعديل]</span>
-                      <div id="certEdit-<?= $cert['certificate_id'] ?>" class="cert-edit-form" style="display: none;">
-                        <form method="POST" action="">
-                          <input type="hidden" name="cert_id" value="<?= $cert['certificate_id'] ?>">
-                          <label>اسم الشهادة / الدورة:</label>
-                          <input type="text" name="cert_name" value="<?= htmlspecialchars($cert['name']) ?>" required>
-                          <br>
-                          <label>الوصف:</label>
-                          <textarea name="cert_desc" rows="3"><?= htmlspecialchars($cert['description']) ?></textarea>
-                          <br>
-                          <label>الشركة (إن وجدت):</label>
-                          <input type="text" name="cert_company" value="<?= htmlspecialchars($cert['company']) ?>">
-                          <br>
-                          <input type="hidden" name="update_certificate" value="1">
-                          <button type="submit">حفظ</button>
-                          <button type="button" onclick="toggleEdit('cert-<?= $cert['certificate_id'] ?>')">إلغاء</button>
-                        </form>
-                      </div>
-                      <form method="POST" action="" class="delete-form" onsubmit="return confirm('هل أنت متأكد من حذف الشهادة؟');">
-                        <input type="hidden" name="cert_id" value="<?= $cert['certificate_id'] ?>">
-                        <input type="hidden" name="delete_certificate" value="1">
-                        <button type="submit" class="delete-btn">[حذف]</button>
-                      </form>
-                    <?php endif; ?>
-                  </li>
-                <?php endforeach; ?>
-              <?php endif; ?>
-            </ul>
-            <?php if ($isOwner): ?>
-              <span class="edit-btn" onclick="toggleEdit('new_certificate')">[إضافة شهادة/دورة جديدة]</span>
-              <div id="certEdit-new_certificate" class="edit-form" style="display: none;">
-                <form method="POST" action="">
-                  <label>اسم الشهادة / الدورة:</label>
-                  <input type="text" name="cert_name" required>
-                  <br>
-                  <label>الوصف:</label>
-                  <textarea name="cert_desc" rows="3"></textarea>
-                  <br>
-                  <label>الشركة (إن وجدت):</label>
-                  <input type="text" name="cert_company">
-                  <br>
-                  <input type="hidden" name="add_certificate" value="1">
-                  <button type="submit">حفظ</button>
-                  <button type="button" onclick="toggleEdit('new_certificate')">إلغاء</button>
-                </form>
-              </div>
-            <?php endif; ?>
-          </div>
-        </section>
-      </main>
     </section>
-  </section>
 
-  <!-- JavaScript to toggle inline edit forms -->
-  <script>
-    // Generic toggle for sections like about, contact, skills, and certificates.
-    function toggleEdit(section) {
-      var displayDiv, editDiv;
-      
-      if (section === 'about') {
-        displayDiv = document.getElementById('aboutDisplay');
-        editDiv = document.getElementById('aboutEdit');
-      } else if (section === 'contact') {
-        displayDiv = document.getElementById('contactDisplay');
-        editDiv = document.getElementById('contactEdit');
-      } else if (section === 'skills') {
-        displayDiv = document.getElementById('skillsDisplay');
-        editDiv = document.getElementById('skillsEdit');
-      } else if (section === 'new_certificate') {
-        editDiv = document.getElementById('certEdit-new_certificate');
-      } else if (section.indexOf('cert-') === 0) {
-        editDiv = document.getElementById('certEdit-' + section.split('-')[1]);
-      }
-      
-      if (editDiv) {
-        if (editDiv.style.display === 'none' || editDiv.style.display === '') {
-          editDiv.style.display = 'block';
-          if (displayDiv) displayDiv.style.display = 'none';
-        } else {
-          editDiv.style.display = 'none';
-          if (displayDiv) displayDiv.style.display = 'block';
+    <!-- JavaScript to toggle inline edit forms -->
+    <script>
+        // Generic toggle for sections like about, contact, skills, and certificates.
+        function toggleEdit(section) {
+            var displayDiv, editDiv;
+
+            if (section === 'about') {
+                displayDiv = document.getElementById('aboutDisplay');
+                editDiv = document.getElementById('aboutEdit');
+            } else if (section === 'contact') {
+                displayDiv = document.getElementById('contactDisplay');
+                editDiv = document.getElementById('contactEdit');
+            } else if (section === 'skills') {
+                displayDiv = document.getElementById('skillsDisplay');
+                editDiv = document.getElementById('skillsEdit');
+            } else if (section === 'new_certificate') {
+                editDiv = document.getElementById('certEdit-new_certificate');
+            } else if (section.indexOf('cert-') === 0) {
+                editDiv = document.getElementById('certEdit-' + section.split('-')[1]);
+            }
+
+            if (editDiv) {
+                if (editDiv.style.display === 'none' || editDiv.style.display === '') {
+                    editDiv.style.display = 'block';
+                    if (displayDiv) displayDiv.style.display = 'none';
+                } else {
+                    editDiv.style.display = 'none';
+                    if (displayDiv) displayDiv.style.display = 'block';
+                }
+            }
         }
-      }
-    }
-    
-    // Toggle function for experience inline edit rows.
-    function toggleExpEdit(expId) {
-      var expRow = document.getElementById('expEdit-' + expId);
-      if (expRow.style.display === 'none' || expRow.style.display === '') {
-        expRow.style.display = 'table-row';
-      } else {
-        expRow.style.display = 'none';
-      }
-    }
-  </script>
+
+        // Toggle function for experience inline edit rows.
+        function toggleExpEdit(expId) {
+            var expRow = document.getElementById('expEdit-' + expId);
+            if (expRow.style.display === 'none' || expRow.style.display === '') {
+                expRow.style.display = 'table-row';
+            } else {
+                expRow.style.display = 'none';
+            }
+        }
+    </script>
 </body>
+
 </html>

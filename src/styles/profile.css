@@ -47,14 +47,15 @@ header {
   background-color: var(--main-color);
   padding: 1.25rem 3rem;
 }
-.username .profile-pic{
+.username .profile-pic {
   width: 60px;
   height: 60px;
   padding: 10px;
   border-radius: 50%;
   background-color: lightgray;
   top: 0;
-}.username {
+}
+.username {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -79,15 +80,14 @@ header {
   padding: 0.5rem 1rem; /* Optional for spacing inside the options box */
 }
 
-.username h2{
+.username h2 {
   font-size: 2rem;
 }
-.username h3
-{
+.username h3 {
   font-size: 1.2rem;
   font-weight: 400;
 }
-.username .user{
+.username .user {
   position: static;
   margin-top: 100px;
 }
@@ -229,7 +229,6 @@ main section {
   }
 }
 
-
 /* Styling the recent activity section */
 .recent-activity {
   display: flex;
@@ -347,8 +346,6 @@ main section {
     padding: 0.5rem;
   }
 }
-
-
 
 @media (min-width: 992px) {
   main > .content {
@@ -557,3 +554,9 @@ main form input {
 }
 
 /* End jobs */
+
+textarea {
+  resize: none;
+  width: 100%;
+  height: 100%;
+}
