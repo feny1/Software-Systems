@@ -1,5 +1,5 @@
 <?php
-include ('../components/page.php');
+include('../components/page.php');
 ?>
 
 <!DOCTYPE html>
@@ -169,7 +169,7 @@ include ('../components/page.php');
 
   <div class="header">
     <h1>موسمي</h1>
-    <a href="../pages/signup.php" class="register-individual">تسجيل الأفراد</a>
+    <a href="../pages/login.php" class="register-individual">تسجيل الدخول</a>
   </div>
 
   <div class="hero">
@@ -177,8 +177,7 @@ include ('../components/page.php');
     <h3>نعمل على توفير الوظائف و العروض المتميزة بسهولة.</h3>
 
     <div class="links">
-      <a href="../pages/signup.php" class="register-company">تسجيل الشركات</a>
-      <a href="../pages/login.php" class="login">تسجيل الدخول</a>
+      <a href="../pages/signup.php" class="login">تسجيل جديد</a>
     </div>
   </div>
 
