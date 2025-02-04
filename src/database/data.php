@@ -86,7 +86,6 @@ $db->exec('CREATE TABLE IF NOT EXISTS applications (
     FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )');
-$db->exec('ALTER TABLE applications ADD COLUMN status TEXT DEFAULT "pending"');
 
 
 $db->exec('CREATE TABLE IF NOT EXISTS employees (
