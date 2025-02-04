@@ -1,6 +1,6 @@
 <?php
-include ('../components/page.php');
-include ('../database/data.php'); 
+include('../components/page.php');
+include('../database/data.php');
 
 $company_id = isset($_GET["id"]) ? intval($_GET["id"]) : ($_SESSION['user']['company_id'] ?? 0);
 

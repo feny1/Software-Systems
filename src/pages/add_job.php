@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $stmt->bindValue(':name', $job_name, SQLITE3_TEXT);
   $stmt->bindValue(':description', $description, SQLITE3_TEXT);
   $stmt->bindValue(':salary', $salary, SQLITE3_INTEGER);
-  $stmt->bindValue(':language_id', $language_id, SQLITE3_INTEGER);
+  // $stmt->bindValue(':language_id', $language_id, SQLITE3_INTEGER);
   $stmt->bindValue(':type', $job_type, SQLITE3_INTEGER);
 
   $result = $stmt->execute();

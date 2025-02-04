@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('../database/data.php');
+include('../database/data.php');
 
 // ✅ Ensure user is logged in
 if (!isset($_SESSION['user']['id'])) {
@@ -25,7 +25,7 @@ if ($existing) {
 }
 
 // ✅ Insert the application into the database
-$stmt = $db->prepare("INSERT INTO applications (job_id, user_id) VALUES (:job_id, :user_id)");
+$stmt = $db->prepare("INSERT INTO applications (job_id, user_id, status) VALUES (:job_id, :user_id, :status)");
 $stmt->bindValue(':job_id', $job_id, SQLITE3_INTEGER);
 $stmt->bindValue(':user_id', $user_id, SQLITE3_INTEGER);
 $stmt->execute();
@@ -33,4 +33,3 @@ $stmt->execute();
 // ✅ Redirect user back to job listings with success message
 header("Location: job_listing.php?success=1");
 exit;
-?>
