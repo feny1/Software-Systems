@@ -92,7 +92,7 @@ try {
           </a>
         </div>
         <div class="options">
-          <a href="#">
+          <a href="./logout.php">
             <img class="nav-icon" style="--color: #DF4F4F" src="../images/logout.svg" alt="شعار تسجيل">
           </a>
         </div>
