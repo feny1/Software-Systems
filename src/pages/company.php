@@ -66,6 +66,7 @@ $applications = fetchAllApplicationsForCompany($company_id);
                         <h2>نبذة</h2>
                         <p><?php echo $specialty; ?></p>
                     </div>
+                    <!-- ERooro -->
                     <div class="block contacts">
                         <h2>معلومات الاتصال</h2>
                         <ul>
