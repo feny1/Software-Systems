@@ -82,6 +82,7 @@ function login($email, $password)
 
         $result = $stmt->execute();
         $user = $result->fetchArray(SQLITE3_ASSOC);
+        if(!empty($user))
         $_SESSION['user']['company_id'] = fetchUserCompany($user['id']);
 
         if ($user && custom_password_verify($password, $user['password'])) {
@@ -323,6 +324,7 @@ function fetchAllEmployeesByJobID($job_id)
     $query = "SELECT employees.*, 
                      users.name AS user_name, 
                      users.email, 
+                     users.id AS user_id,
                      jobs.*, 
                      company.name AS company_name 
               FROM employees
@@ -361,6 +363,7 @@ function fetchAllEmployeesByCompanyID($company_id)
     $query = "SELECT employees.*, 
                      users.name AS user_name, 
                      users.email, 
+                     users.id AS user_id, 
                      jobs.*, 
                      company.name AS company_name 
               FROM employees
@@ -375,9 +378,6 @@ function fetchAllEmployeesByCompanyID($company_id)
         $employees[] = $row;
     }
 
-    if (empty($employees)) {
-        throw new Exception("No employees found for company ID: $company_id.");
-    }
 
     return [
         "employees" => $employees,

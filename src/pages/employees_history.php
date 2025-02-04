@@ -1,22 +1,13 @@
 <?php
 include('../components/page.php');
-include('../database/data.php');
 
-try {
   if (isset($_GET['job_id'])) {
-    $employeeData = fetchAllEmployeesByJobID($_GET['job_id']);
+    $employee = fetchAllEmployeesByJobID($_GET['job_id'])['employees'];
   } elseif (isset($_GET['company_id'])) {
-    $employeeData = fetchAllEmployeesByCompanyID($_GET['company_id']);
+    $employee = fetchAllEmployeesByCompanyID($_GET['company_id'])['employees'];
   } else {
-    throw new Exception("No parameters provided in the URL.");
+    $employee = fetchAllEmployeesByCompanyID($_SESSION['user']['company_id'])['employees'];
   }
-
-  $employee = $employeeData["employees"];
-  $success_message = $employeeData["success"];
-} catch (Exception $e) {
-  $error_message = $e->getMessage();
-  $employee = [];
-}
 ?>
 
 <!DOCTYPE html>
@@ -122,8 +113,7 @@ try {
                     <td><?= isset($emp['end']) && $emp['end'] ? htmlspecialchars($emp['end']) : 'لا زال على رأس العمل'; ?></td>
                     <td><?= htmlspecialchars($emp['job_title'] ?? $emp['name']); ?></td>
                     <td class="actions">
-                      <button class="details">إظهار التفاصيل</button>
-                      <button class="delete">حذف</button>
+                      <a class="details" href="./profile.php?id=<?= $emp['user_id']?>">إظهار التفاصيل</a>
                     </td>
                   </tr>
                 <?php endforeach; ?>

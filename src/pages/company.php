@@ -166,13 +166,13 @@ foreach ($jobs as $job) {
             <div id="companyContactDisplay">
               <ul>
                 <li>البريد الإلكتروني:
-                  <a href="mailto:<?php echo htmlspecialchars($email); ?>"><?php echo htmlspecialchars($email); ?></a>
+                  <a href="mailto:<?php echo htmlspecialchars($email); ?>"><?php echo htmlspecialchars($email?? 'لا يوجد'); ?></a>
                 </li>
                 <li>رقم الهاتف:
-                  <a href="tel:<?php echo htmlspecialchars($phone); ?>"><?php echo htmlspecialchars($phone); ?></a>
+                  <a href="tel:<?php echo htmlspecialchars($phone); ?>"><?php echo htmlspecialchars($phone?? 'لا يوجد'); ?></a>
                 </li>
                 <li>لينكد إن:
-                  <a href="<?php echo htmlspecialchars($linkedin); ?>" target="_blank"><?php echo htmlspecialchars($linkedin); ?></a>
+                  <a href="<?php echo htmlspecialchars($linkedin); ?>" target="_blank"><?php echo htmlspecialchars($linkedin ?? 'لا يوجد'); ?></a>
                 </li>
               </ul>
               <?php if ($isOwner): ?>

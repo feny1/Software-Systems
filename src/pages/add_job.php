@@ -100,8 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="field">
           <label for="salary">الراتب</label>
-          <input type="text" name="salary" id="salary" required>
-<<<<<<< HEAD
+          <input type="text" name="salary" id="salary" min="0" required>
         </div>
         <!-- New fields for start and end date -->
         <div class="field">
@@ -118,8 +117,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <option value="العربية">العربية</option>
             <option value="English">English</option>
           </select>
-=======
->>>>>>> 23910ce9aa041fe6568df017301e01aeb4c6e335
         </div>
         <div class="field">
           <label for="job_type">نوع الوظيفة</label>

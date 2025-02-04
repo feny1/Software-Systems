@@ -9,7 +9,8 @@ if (!isset($_GET['id']) && !isset($_SESSION['user'])) {
 }
 
 // Retrieve the user: either from the session or via GET id.
-$user = $_SESSION['user'] ?? getUserById($_GET['id']);
+$user = isset($_GET['id'])?getUserById($_GET['id']) : $_SESSION['user'];
+$name = $user['name'];
 
 // Determine if the logged-in user is the owner of this profile.
 $isOwner = (isset($_SESSION['user']) && $_SESSION['user']['id'] == $user['id']);
@@ -28,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // Process Contact update (phone and linkedin)
     if ($isOwner && isset($_POST['update_contact'])) {
-        $newPhone = $_POST['phone'] ?? '';
-        $newLinkedin = $_POST['linkedin'] ?? '';
+        $newPhone = isset($_POST['phone']) && trim($_POST['phone']) !== '' ? trim($_POST['phone']) : 'لا يوجد';
+        $newLinkedin = isset($_POST['linkedin']) && trim($_POST['linkedin']) !== '' ? trim($_POST['linkedin']) : 'لا يوجد';
         $stmt = $db->prepare("UPDATE users SET phone = :phone, linkedin = :linkedin WHERE id = :id");
         $stmt->bindValue(':phone', $newPhone, SQLITE3_TEXT);
         $stmt->bindValue(':linkedin', $newLinkedin, SQLITE3_TEXT);
@@ -152,7 +153,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 ?>
 
 <?php
-$user_id = $_SESSION['user']['id'];
+$user_id = $user['id'];
 $responses = fetchResponseByUserID($user_id);
 ?>
 
@@ -224,10 +225,7 @@ $responses = fetchResponseByUserID($user_id);
             <div class="username">
                 <img class="profile-pic" src="../images/profile.svg" alt="صورة المستخدم">
                 <div class="user">
-                    <h2><?= htmlspecialchars($user['name']) ?></h2>
-                    <?php if ($isOwner): ?>
-                        <span class="edit-btn" onclick="toggleEdit('profile')">[تعديل الملف الشخصي]</span>
-                    <?php endif; ?>
+                    <h2><?= htmlspecialchars($name) ?></h2>
                 </div>
             </div>
             <div class="options">
@@ -293,13 +291,13 @@ $responses = fetchResponseByUserID($user_id);
                         <div id="contactDisplay">
                             <ul>
                                 <li>البريد الإلكتروني:
-                                    <a href="mailto:<?= $email ?>"><?= $email ?></a>
+                                    <a href="mailto:<?= $email ?>"><?= $email ?? 'لا يوجد' ?></a>
                                 </li>
                                 <li>رقم الهاتف:
-                                    <a href="tel:<?= $phone ?>"><?= $phone ?></a>
+                                    <a href="tel:<?= $phone ?>"><?= $phone ?? 'لا يوجد' ?></a>
                                 </li>
                                 <li>لينكد إن:
-                                    <a href="<?= $linkedin ?>"><?= $linkedin ?></a>
+                                    <a href="<?= $linkedin ?>"><?= $linkedin ?? 'لا يوجد' ?></a>
                                 </li>
                             </ul>
                             <?php if ($isOwner): ?>
@@ -328,6 +326,7 @@ $responses = fetchResponseByUserID($user_id);
 
                 <section class="recent-activity">
 
+                        <?php if($isOwner){ ?>
                     <div class="block applications">
                         <h2>طلبات الوظائف المقدمة</h2>
                         <table cellpadding="5" cellspacing="0" style="width:100%; text-align:right;">
@@ -363,6 +362,7 @@ $responses = fetchResponseByUserID($user_id);
                             <?php endif; ?>
                         </table>
                     </div>
+                    <?php } ?>
 
 
                     <!-- History Section (السجل) - Display Only -->

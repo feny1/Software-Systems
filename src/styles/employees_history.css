@@ -193,7 +193,7 @@ main form input {
   background-color: #f3f3f3;
 }
 
-.actions button {
+.actions a {
   margin: 5px;
   padding: 10px;
   border: none;
