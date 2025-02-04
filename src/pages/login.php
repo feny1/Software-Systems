@@ -267,6 +267,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         showPasswordCheckbox.addEventListener('change', function() {
             passwordInput.type = this.checked ? 'text' : 'password';
         });
+
+        // valid email
     </script>
 </body>
 
